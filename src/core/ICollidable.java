@@ -1,6 +1,6 @@
 package core;
 
-public interface ICollidable extends IDrawable {
+public interface ICollidable extends IDrawable, IDynamic {
 	/**
 	 * A callback which is initialized whenever this object collides with another.
 	 * @param other : whatever we collided with.

@@ -1,10 +1,14 @@
 package core;
 
-public class BaseCollidable implements ICollidable {
+public class BaseCollidable extends BaseDynamic implements ICollidable {
 
 	private float x,y, width, height;
 	
-	
+	@Override
+	public void step()
+	{
+		System.out.println("Lolwut");
+	}
 	
 	public BaseCollidable()
 	{

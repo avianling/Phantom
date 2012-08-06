@@ -1,6 +1,5 @@
 package core;
 
-import input.BaseEventModel;
 import input.EKey;
 import input.IKeyListener;
 
@@ -11,6 +10,7 @@ public class BaseWorld implements IWorld, IKeyListener {
 	// a list of all of the things which are drawable in the game world.
 	private ArrayList<IDrawable> drawingList;
 	private ArrayList<ICollidable> collidableList;
+	private ArrayList<IDynamic> dynamicList;
 	
 	// the time at which the last frame was calculated.
 	private long nextTick;
@@ -20,9 +20,10 @@ public class BaseWorld implements IWorld, IKeyListener {
 	{
 		drawingList = new ArrayList<IDrawable>();
 		collidableList = new ArrayList<ICollidable>();
+		dynamicList = new ArrayList<IDynamic>();
 		
 		// make this world an event listener.
-		BaseEventModel.getEventModel().addListener(this);
+		//BaseEventModel.getEventModel().addListener(this);
 		initalize();
 		
 		millisPerFrame = 1000 / Configuration.getFPS();
@@ -47,6 +48,17 @@ public class BaseWorld implements IWorld, IKeyListener {
 			collidableList.add((ICollidable)obj);
 		}
 		
+		// if the object is dynamic, add the object to the dynamic list.
+		if ( IDynamic.class.isInstance(obj) )
+		{
+			dynamicList.add((IDynamic)obj);
+		}
+		
+		// if the object is able to receive key input, add it to the event listeners observers list.
+		if ( IKeyListener.class.isInstance(obj) )
+		{
+			Configuration.getEventModel().addListener(obj);
+		}
 	}
 	
 	public void checkCollisions()
@@ -89,6 +101,12 @@ public class BaseWorld implements IWorld, IKeyListener {
 			// check weather any collisions have happened.
 			checkCollisions();
 			//System.out.println("Event Fired!");
+			
+			// run the objects step events.
+			for ( IDynamic d : dynamicList )
+			{
+				d.step();
+			}
 			
 			// update the timers.
 			nextTick = System.currentTimeMillis() + millisPerFrame;
