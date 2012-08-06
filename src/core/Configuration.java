@@ -1,5 +1,8 @@
 package core;
 import graphics.*;
+import input.IEventModel;
+import input.SwingEventModel;
+
 import java.lang.reflect.*;
 
 public class Configuration {
@@ -14,8 +17,13 @@ public class Configuration {
 		width = 640;
 		height = 480;
 		
-		worldModel = new BaseWorld();
-		displayModel = new SwingModel();
+		try {
+			worldModel = new BaseWorld();
+			eventModel = new SwingEventModel();
+			displayModel = new SwingModel();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 		IDrawable thing = new BaseCollidable(128.f, 64.f, 64.f, 64.f);
 		worldModel.add(thing);
@@ -33,7 +41,9 @@ public class Configuration {
 	private static int fps = 1;
 	private static IWorld worldModel;
 	private static IDisplayModel displayModel;
+	private static IEventModel eventModel;
 	private static String title = "Darwin v0.2";
+	
 	
 	public static String getTitle()
 	{
@@ -53,6 +63,11 @@ public class Configuration {
 	public static IDisplayModel getDisplayModel()
 	{
 		return displayModel;
+	}
+	
+	public static IEventModel getEventModel()
+	{
+		return eventModel;
 	}
 	
 	public static int getWidth()

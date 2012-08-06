@@ -2,6 +2,7 @@ package graphics;
 
 import core.Configuration;
 import core.IWorld;
+import input.IEventModel;
 import input.SwingEventModel;
 
 import javax.swing.*;
@@ -32,6 +33,8 @@ public class SwingModel extends JFrame implements IDisplayModel {
 		}
 	}
 	
+	private IEventModel eventModel;
+	
 	private myPanel drawingArea;
 	
 	public void drawRectangle( float x, float y, float w, float h )
@@ -39,15 +42,23 @@ public class SwingModel extends JFrame implements IDisplayModel {
 		drawingArea.drawRectangle((int)x, (int)y, (int)w, (int)h);
 	}
 	
-	public SwingModel()
+	public SwingModel() throws Exception
 	{
 		setTitle(Configuration.getTitle());
 		setSize(Configuration.getWidth(), Configuration.getHeight());
 		setLocation(0,0);
 		
+		// store the key event listener
+		
+		eventModel = Configuration.getEventModel();
+		// if it is not a KeyListener, then it is not a valid event model to use with swing.
+		if ( !KeyListener.class.isInstance(eventModel) )
+		{
+			throw new Exception("Invalid event model for use with swing!");
+		}
+		
 		addWindowListener(new SwingExitListener());
-		// TODO
-		// add key listener stuff later.
+		addKeyListener((KeyListener) eventModel);
 		
 		Container content = getContentPane();
 		
@@ -71,60 +82,4 @@ public class SwingModel extends JFrame implements IDisplayModel {
 	{
 		repaint();
 	}
-	
-	
-	/*private JFrame frame;
-	
-	private Graphics2D g;
-	
-	public SwingModel()
-	{
-		// create a JFrame to contain this object.
-		frame = new JFrame();
-		frame.setSize(Configuration.getWidth(), Configuration.getHeight());
-		frame.setBackground(Color.white);
-		frame.add(this);
-		frame.setVisible(true);
-		
-		// create an exit listener to detect when the window is closed
-		// and terminate the program when this happens.
-		frame.addWindowListener(new SwingExitListener());
-		// forces the use of the SwingEventModel, since we are using swing after all.
-		frame.addKeyListener( SwingEventModel.getEventModel() );
-	}
-	
-	@Override
-	public void initalize() {
-		// does nothing in this implementation
-	}
-
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		// make the object redraw itself.
-		System.out.println("Draw event called for SwingModel");
-		this.repaint();
-	}
-	
-	@Override
-	public void paintComponent(Graphics graphics)
-	{
-		//super.paintComponents(g);
-		System.out.println("paintComponent is called!");
-		g = (Graphics2D)graphics;
-		
-		// call the display method of the world.
-		Configuration.getWorldModel().display();
-	}
-	
-	
-
-	@Override
-	public void drawRectangle(float X, float Y, float W, float H) {
-		// TODO Auto-generated method stub
-		g.drawRect((int)X, (int)Y, (int)W, (int)H);
-	}*/
-	
-	
-
 }
