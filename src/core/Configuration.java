@@ -25,14 +25,13 @@ public class Configuration {
 			System.out.println(e.getMessage());
 		}
 		
-		IDrawable thing = new BaseCollidable(128.f, 64.f, 64.f, 64.f);
-		worldModel.add(thing);
-		
+		Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
+		Drawable thing2 = new BaseCollidable(16,16,32,32);
 		new MovementDemo();
 		
 		//worldModel.simulate();
 		
-		worldModel.add(new BaseCollidable());
+		
 		
 		while (true)
 		{

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class BaseWorld implements IWorld, IKeyListener {
 
 	// a list of all of the things which are drawable in the game world.
-	private ArrayList<IDrawable> drawingList;
-	private ArrayList<ICollidable> collidableList;
-	private ArrayList<IDynamic> dynamicList;
+	private ArrayList<Drawable> drawingList;
+	private ArrayList<Collidable> collidableList;
+	private ArrayList<Dynamic> dynamicList;
 	
 	// the time at which the last frame was calculated.
 	private long nextTick;
@@ -18,9 +18,9 @@ public class BaseWorld implements IWorld, IKeyListener {
 	
 	public BaseWorld()
 	{
-		drawingList = new ArrayList<IDrawable>();
-		collidableList = new ArrayList<ICollidable>();
-		dynamicList = new ArrayList<IDynamic>();
+		drawingList = new ArrayList<Drawable>();
+		collidableList = new ArrayList<Collidable>();
+		dynamicList = new ArrayList<Dynamic>();
 		
 		// make this world an event listener.
 		//BaseEventModel.getEventModel().addListener(this);
@@ -36,22 +36,22 @@ public class BaseWorld implements IWorld, IKeyListener {
 		// here we are supposed to add an object to the world.
 		// determine what type it is and then add the object to the appropriate array
 		// of objects.
-		if ( IDrawable.class.isInstance(obj) )
+		if ( Drawable.class.isInstance(obj) )
 		{
 			// add to the drawing list.
-			drawingList.add((IDrawable) obj );
+			drawingList.add((Drawable) obj );
 		}
 		
 		// if the object is collidable, the put it into the collidable list.
-		if ( ICollidable.class.isInstance(obj) )
+		if ( Collidable.class.isInstance(obj) )
 		{
-			collidableList.add((ICollidable)obj);
+			collidableList.add((Collidable)obj);
 		}
 		
 		// if the object is dynamic, add the object to the dynamic list.
-		if ( IDynamic.class.isInstance(obj) )
+		if ( Dynamic.class.isInstance(obj) )
 		{
-			dynamicList.add((IDynamic)obj);
+			dynamicList.add((Dynamic)obj);
 		}
 		
 		// if the object is able to receive key input, add it to the event listeners observers list.
@@ -64,24 +64,24 @@ public class BaseWorld implements IWorld, IKeyListener {
 	public void checkCollisions()
 	{
 		int start = 0;
-		for ( ICollidable left : collidableList )
+		for ( Collidable left : collidableList )
 		{
 			for ( int i=start; i < collidableList.size(); i++ )
 			{
-				start++;
-				ICollidable right = collidableList.get(i);
+				Collidable right = collidableList.get(i);
 				if ( left.collision(right) )
 				{
 					left.collisionEvent(right);
 					right.collisionEvent(left);
 				}
 			}
+			start++;
 		}
 	}
 	
 	public void display() {
 		// TODO Fill out this function. should make all the drawable object draw themselves.
-		for ( IDrawable e : drawingList )
+		for ( Drawable e : drawingList )
 		{
 			e.draw();
 		}
@@ -103,7 +103,7 @@ public class BaseWorld implements IWorld, IKeyListener {
 			//System.out.println("Event Fired!");
 			
 			// run the objects step events.
-			for ( IDynamic d : dynamicList )
+			for ( Dynamic d : dynamicList )
 			{
 				d.step();
 			}

@@ -1,10 +1,7 @@
 package core;
 
-public class BaseCollidable extends BaseDynamic implements ICollidable {
-
-	private float x,y, width, height;
+public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
-	@Override
 	public void step()
 	{
 		//System.out.println("Lolwut");
@@ -12,32 +9,20 @@ public class BaseCollidable extends BaseDynamic implements ICollidable {
 	
 	public BaseCollidable()
 	{
-		x = 32.f;
-		y = 32.f;
-		width = 64.f;
-		height = 64.f;
+		super();
+		setPosition(0,0);
+		setSpeed(0,0);
+		setBounds(32,32);
+		Configuration.getWorldModel().add(this);
 	}
 	
 	public BaseCollidable( float x, float y, float w, float h )
 	{
-		this.x = x;
-		this.y = y;
-		this.width = w;
-		this.height = h;
-	}
-	
-	@Override
-	public float X() {return x;}
-
-	@Override
-	public float Y() {return y;}
-	public float W() {return width;}
-	public float H() {return height;}
-
-	@Override
-	public void setPosition(float x, float y) {
-		this.x = x;
-		this.y = y;
+		super();
+		Configuration.getWorldModel().add(this);
+		setPosition(x,y);
+		setBounds((int)w,(int)h);
+		Configuration.getWorldModel().add(this);
 	}
 
 	@Override
@@ -47,7 +32,7 @@ public class BaseCollidable extends BaseDynamic implements ICollidable {
 	}
 
 	@Override
-	public void collisionEvent(ICollidable other) {
+	public void collisionEvent(Collidable other) {
 		//System.out.println("A collision has occured!");
 	}
 
@@ -62,11 +47,11 @@ public class BaseCollidable extends BaseDynamic implements ICollidable {
 	}
 
 	// Broken.
-	public boolean collision(ICollidable other) {
+	public boolean collision(Collidable other) {
 		// check if a collision occurs between this object and the other.
 		
 		// first check that the other object is one which we can collide with.
-		if (ICollidable.class.isInstance(other))
+		if (Collidable.class.isInstance(other))
 		{	
 			float otherX = other.X() - X();
 			float otherY = other.Y() - Y();
@@ -81,11 +66,5 @@ public class BaseCollidable extends BaseDynamic implements ICollidable {
 		}
 		
 		return false;
-	}
-
-	@Override
-	public float collision(float iX, float iY, float dX, float dY) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

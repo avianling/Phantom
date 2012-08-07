@@ -1,17 +1,21 @@
 package demo;
 
-import core.BaseDynamic;
+import core.BaseObject;
+import core.Collidable;
+import core.Dynamic;
 import core.Configuration;
-import core.IDrawable;
+import core.Drawable;
 import input.EKey;
 import input.IKeyListener;
 
-public class MovementDemo extends BaseDynamic implements IKeyListener, IDrawable {
+public class MovementDemo extends BaseObject implements Dynamic, Drawable, Collidable, IKeyListener {
 
 	public MovementDemo()
 	{
-		_dX = 0; _dY = 0;
-		_X = 128; _Y = 128;
+		super();
+		setPosition(128,128);
+		setBounds(32,32);
+		setSpeed(0,0);
 		Configuration.getWorldModel().add(this);
 	}
 	
@@ -47,24 +51,26 @@ public class MovementDemo extends BaseDynamic implements IKeyListener, IDrawable
 		}
 	}
 
-	@Override
-	public float W() {
-		return 32;
-	}
-
-	@Override
-	public float H() {
-		return 32;
-	}
-
-	@Override
-	public void setPosition(float x, float y) {
-		_X = x; _Y = y;
-	}
-
-	@Override
 	public void draw() {
 		Configuration.getDisplayModel().drawRectangle(X(), Y(), W(), H());
 	}
 
+	@Override
+	public void collisionEvent(Collidable other) {
+		// TODO Auto-generated method stub
+		System.out.println("A collision occured!");
+	}
+
+	@Override
+	public boolean collision(Collidable other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean collision(float x, float y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }
