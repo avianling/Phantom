@@ -22,8 +22,8 @@ public class SwingEventModel implements KeyListener, IEventModel {
 		keyMapping.put(32, EKey.KeySpace);
 		keyMapping.put(38, EKey.KeyUp);
 		keyMapping.put(37, EKey.KeyLeft);
-		keyMapping.put(39, EKey.KeyDown);
-		keyMapping.put(40, EKey.KeyRight);
+		keyMapping.put(39, EKey.KeyRight);
+		keyMapping.put(40, EKey.KeyDown);
 		keyMapping.put(65, EKey.Key_a);
 		keyMapping.put(66, EKey.Key_b);
 		keyMapping.put(67, EKey.Key_c);
@@ -51,26 +51,6 @@ public class SwingEventModel implements KeyListener, IEventModel {
 		keyMapping.put(89, EKey.Key_y);
 		keyMapping.put(90, EKey.Key_z);
 	}
-	
-	/*public static SwingEventModel getEventModel()
-	{
-		if ( singleton == null )
-		{*/
-			/* the object does not exist, so we create it and return it.
-			 * Note: When you create a new type of event model,
-			 * you have to change the line below from SwingEventModel to
-			 * whichever new eventmodel you are creating.
-			 * This feels a bit iffy.
-			 */
-			/*SwingEventModel e = new SwingEventModel();
-			singleton = e;
-			return e;
-		} 
-		else
-		{
-			return singleton;
-		}
-	}*/
 	
 	
 	@Override
@@ -114,10 +94,9 @@ public class SwingEventModel implements KeyListener, IEventModel {
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		//System.out.println("A Key has been pressed");
 		int keyCode = arg0.getKeyCode();
-		System.out.println(keyCode + ":" + arg0.getKeyChar());
+		//System.out.println(keyCode + ":" + arg0.getKeyChar());
 		if ( keyMapping.containsKey(keyCode) )
 		{
 			sendKeyPressedEvent(keyMapping.get(keyCode));
@@ -126,8 +105,6 @@ public class SwingEventModel implements KeyListener, IEventModel {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		//System.out.println("A Key has been released");
 		int keyCode = arg0.getKeyCode();
 		if ( keyMapping.containsKey(keyCode) )
 		{
@@ -137,7 +114,6 @@ public class SwingEventModel implements KeyListener, IEventModel {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		//System.out.println("A key has been typed");
 	}
 	

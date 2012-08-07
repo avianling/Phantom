@@ -7,7 +7,7 @@ public interface IDrawable {
 	public float W();
 	public float H();
 	
-	public void setPosition(float x, float y);
+	//public void setPosition(float x, float y);
 	
 	public void draw();
 }

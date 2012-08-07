@@ -7,7 +7,7 @@ public class BaseCollidable extends BaseDynamic implements ICollidable {
 	@Override
 	public void step()
 	{
-		System.out.println("Lolwut");
+		//System.out.println("Lolwut");
 	}
 	
 	public BaseCollidable()

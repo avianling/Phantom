@@ -2,7 +2,7 @@ package core;
 import graphics.*;
 import input.IEventModel;
 import input.SwingEventModel;
-
+import demo.*;
 import java.lang.reflect.*;
 
 public class Configuration {
@@ -28,6 +28,8 @@ public class Configuration {
 		IDrawable thing = new BaseCollidable(128.f, 64.f, 64.f, 64.f);
 		worldModel.add(thing);
 		
+		new MovementDemo();
+		
 		//worldModel.simulate();
 		
 		worldModel.add(new BaseCollidable());
@@ -38,7 +40,7 @@ public class Configuration {
 		}
 	}
 	
-	private static int fps = 1;
+	private static int fps = 30;
 	private static IWorld worldModel;
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;

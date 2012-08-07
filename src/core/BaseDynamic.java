@@ -2,9 +2,15 @@ package core;
 
 public class BaseDynamic implements IDynamic {
 
-	private float _lastX, _lastY;
-	private float _dX, _dY;
-	private float _X, _Y;
+	protected float _lastX, _lastY;
+	protected float _dX, _dY;
+	protected float _X;
+	protected float _Y;
+	
+	public void setPosition( float x, float y )
+	{
+		_X = x; _Y = y;
+	}
 	
 	@Override
 	public void step() {
