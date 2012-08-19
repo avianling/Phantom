@@ -15,4 +15,7 @@ public interface IDisplayModel {
 	
 	// draws a simple rectangle.
 	public void drawRectangle( float X, float Y, float W, float H);
+	
+	// draws an image at the given position
+	public void drawImage( Object image, float x, float y );
 }

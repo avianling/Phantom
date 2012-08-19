@@ -8,52 +8,28 @@ import core.Drawable;
 import input.EKey;
 import input.IKeyListener;
 
-public class MovementDemo extends BaseObject implements Dynamic, Drawable, Collidable, IKeyListener {
+public class ImageDemo extends BaseObject implements Drawable, Collidable {
 
-	public MovementDemo()
+	private Object picture;
+	
+	public ImageDemo()
 	{
 		super();
 		setPosition(128,128);
 		setBounds(32,32);
 		setSpeed(0,0);
+		
+		picture = Configuration.getContentManager().loadImage("C:\\test.png");
 		Configuration.getWorldModel().add(this);
-	}
-	
-	@Override
-	public void KeyPressed(EKey key) {
-		if ( key == EKey.KeyLeft)
-		{
-			setSpeed(-4,dY());
-		}
-		if ( key == EKey.KeyRight )
-		{
-			setSpeed(4,dY());
-		}
-		if ( key==EKey.KeyUp )
-		{
-			setSpeed(dX(),-4);
-		}
-		if ( key==EKey.KeyDown )
-		{
-			setSpeed(dX(),4);
-		}
-	}
-
-	@Override
-	public void KeyReleased(EKey key) {
-		if ( key==EKey.KeyLeft || key==EKey.KeyRight )
-		{
-			setSpeed(0,dY());
-		}
-		if ( key==EKey.KeyUp || key==EKey.KeyDown )
-		{
-			setSpeed(dX(), 0 );
-		}
+		
+		
+		
 	}
 
 	public void draw() {
-		Configuration.getDisplayModel().drawRectangle(X(), Y(), W(), H());
+		Configuration.getDisplayModel().drawImage(picture, X(), Y());
 	}
+	
 
 	@Override
 	public void collisionEvent(Collidable other) {

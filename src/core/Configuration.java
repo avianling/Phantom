@@ -21,13 +21,28 @@ public class Configuration {
 			worldModel = new BaseWorld();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
+			contentManager = (IContentManager) displayModel;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
-		Drawable thing2 = new BaseCollidable(16,16,32,32);
-		new MovementDemo();
+		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
+		//Drawable thing2 = new BaseCollidable(16,16,32,32);
+		ImageDemo id = new ImageDemo();
+		id.setPosition(300, 300);
+		MovementDemo copy1 = new MovementDemo();
+		MovementDemo copy2 = new MovementDemo();
+		MovementDemo copy3 = new MovementDemo();
+		MovementDemo copy4 = new MovementDemo();
+		
+		
+		
+		//copy2.setPosition(128, 128+1*48);
+		//copy3.setPosition(128, 128+2*48);
+		//copy4.setPosition(128, 128+3*48);
+		
+		
+		//new rosRotation();
 		
 		//worldModel.simulate();
 		
@@ -39,10 +54,11 @@ public class Configuration {
 		}
 	}
 	
-	private static int fps = 30;
+	private static int fps = 60;
 	private static IWorld worldModel;
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;
+	private static IContentManager contentManager;
 	private static String title = "Darwin v0.2";
 	
 	
@@ -79,6 +95,11 @@ public class Configuration {
 	public static int getHeight()
 	{
 		return height;
+	}
+	
+	public static IContentManager getContentManager()
+	{
+		return contentManager;
 	}
 	
 	private static int width, height;

@@ -5,12 +5,16 @@ import core.IWorld;
 import input.IEventModel;
 import input.SwingEventModel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-public class SwingModel extends JFrame implements IDisplayModel {
+public class SwingModel extends JFrame implements IDisplayModel, IContentManager {
 	
 	class myPanel extends JPanel {
 		IWorld theWorld;
@@ -31,6 +35,11 @@ public class SwingModel extends JFrame implements IDisplayModel {
 		{
 			g2.drawRect(x,y,w,h);
 		}
+		
+		public void drawImage( BufferedImage img, int x, int y )
+		{
+			g2.drawImage(img, x, y, null);
+		}
 	}
 	
 	private IEventModel eventModel;
@@ -40,6 +49,16 @@ public class SwingModel extends JFrame implements IDisplayModel {
 	public void drawRectangle( float x, float y, float w, float h )
 	{
 		drawingArea.drawRectangle((int)x, (int)y, (int)w, (int)h);
+	}
+	
+	public void drawImage( Object img, float x, float y )
+	{
+		if ( BufferedImage.class.isInstance(img) )
+		{
+			drawingArea.drawImage( (BufferedImage)img, (int)x, (int)y );
+		} else {
+			System.out.println("Warning: image supplied is not valid.");
+		}
 	}
 	
 	public SwingModel() throws Exception
@@ -69,6 +88,20 @@ public class SwingModel extends JFrame implements IDisplayModel {
 		content.add(drawingArea);
 	
 		show();
+	}
+	
+	@Override
+	public Object loadImage( String imageName )
+	{
+		// try and load the file.
+		try {
+			BufferedImage I = ImageIO.read(new File(imageName));
+			
+			return I;
+		} catch (IOException e) {
+			System.out.println("Error loading the specified file.");
+		}
+		return null;
 	}
 	
 	@Override
