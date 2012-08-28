@@ -48,5 +48,11 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public int getDepth() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
 	
 }

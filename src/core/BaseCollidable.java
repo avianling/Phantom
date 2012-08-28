@@ -2,6 +2,12 @@ package core;
 
 public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
+	@Override
+	public int getDepth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	public void step()
 	{
 		//System.out.println("Lolwut");

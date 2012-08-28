@@ -20,6 +20,12 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	}
 	
 	@Override
+	public int getDepth() {
+		// TODO Auto-generated method stub
+		return -5;
+	}
+	
+	@Override
 	public void KeyPressed(EKey key) {
 		if ( key == EKey.KeyLeft)
 		{

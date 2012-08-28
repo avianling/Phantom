@@ -13,4 +13,6 @@ public interface Drawable {
 	 * superfile.
 	 */
 	public void draw();
+	
+	public int getDepth();
 }

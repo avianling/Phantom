@@ -32,12 +32,12 @@ public class Configuration {
 		id.setPosition(300, 300);
 		MovementDemo copy1 = new MovementDemo();
 		MovementDemo copy2 = new MovementDemo();
-		MovementDemo copy3 = new MovementDemo();
-		MovementDemo copy4 = new MovementDemo();
+		//MovementDemo copy3 = new MovementDemo();
+		//MovementDemo copy4 = new MovementDemo();
 		
 		
 		
-		//copy2.setPosition(128, 128+1*48);
+		copy2.setPosition(128, 128+1*48);
 		//copy3.setPosition(128, 128+2*48);
 		//copy4.setPosition(128, 128+3*48);
 		

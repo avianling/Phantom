@@ -31,6 +31,12 @@ public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyLi
 	}
 	
 	@Override
+	public int getDepth() {
+		// TODO Auto-generated method stub
+		return -10;
+	}
+	
+	@Override
 	public void step()
 	{
 		angle += angularSpeed;

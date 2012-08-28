@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class BaseWorld implements IWorld, IKeyListener {
 
 	// a list of all of the things which are drawable in the game world.
-	private ArrayList<Drawable> drawingList;
+	//private ArrayList<Drawable> drawingList;
+	private DrawableTreeNode drawableTreeRoot;
 	private ArrayList<Collidable> collidableList;
 	private ArrayList<Dynamic> dynamicList;
 	
@@ -18,7 +19,8 @@ public class BaseWorld implements IWorld, IKeyListener {
 	
 	public BaseWorld()
 	{
-		drawingList = new ArrayList<Drawable>();
+		//drawingList = new ArrayList<Drawable>();
+		drawableTreeRoot = new DrawableTreeNode();
 		collidableList = new ArrayList<Collidable>();
 		dynamicList = new ArrayList<Dynamic>();
 		
@@ -39,7 +41,8 @@ public class BaseWorld implements IWorld, IKeyListener {
 		if ( Drawable.class.isInstance(obj) )
 		{
 			// add to the drawing list.
-			drawingList.add((Drawable) obj );
+			//drawingList.add((Drawable) obj );
+			drawableTreeRoot.add((Drawable)obj);
 		}
 		
 		// if the object is collidable, the put it into the collidable list.
@@ -81,10 +84,11 @@ public class BaseWorld implements IWorld, IKeyListener {
 	
 	public void display() {
 		// TODO Fill out this function. should make all the drawable object draw themselves.
-		for ( Drawable e : drawingList )
+		/*for ( Drawable e : drawingList )
 		{
 			e.draw();
-		}
+		}*/
+		drawableTreeRoot.draw();
 	}
 	
 	@Override
