@@ -6,23 +6,24 @@ import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
 import graphics.AnimatedSprite;
+import graphics.CharsetSprite;
 import graphics.ISprite;
 import graphics.StaticSprite;
 import input.EKey;
 import input.IKeyListener;
 
-public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynamic {
+public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dynamic {
 
 	private ISprite picture;
 	
-	public ImageDemo()
+	public CharsetDemo()
 	{
 		super();
 		setPosition(128,128);
 		setBounds(32,32);
 		setSpeed(0,0);
 		
-		picture = new AnimatedSprite("test.png",3);
+		picture = new CharsetSprite("test.bmp",128,128);
 		Configuration.getWorldModel().add(this);
 		
 	}

@@ -21,7 +21,7 @@ public class Configuration {
 			worldModel = new BaseWorld();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
-			contentManager = (IContentManager) displayModel;
+			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -34,6 +34,9 @@ public class Configuration {
 		MovementDemo copy2 = new MovementDemo();
 		//MovementDemo copy3 = new MovementDemo();
 		//MovementDemo copy4 = new MovementDemo();
+		
+		CharsetDemo cd = new CharsetDemo();
+		cd.setPosition(100,300);
 		
 		
 		

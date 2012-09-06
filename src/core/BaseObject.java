@@ -75,14 +75,14 @@ public class BaseObject implements GameObject {
 	 * The default constructor.<br/>
 	 * This is mainly used to specify default values for things.
 	 */
-	public void RealObject()
+	/*public void RealObject()
 	{
 		setPosition(0,0);
 		setBounds(32,32);
 		
 		// add ourselves to the world class.
 		Configuration.getWorldModel().add(this);
-	}
+	}*/
 	
 	
 	public void step()
