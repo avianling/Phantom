@@ -41,25 +41,21 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 
 	@Override
 	public void collisionEvent(Collidable other) {
-		// TODO Auto-generated method stub
 		//System.out.println("A collision occured!");
 	}
 
 	@Override
 	public boolean collision(Collidable other) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean collision(float x, float y) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getDepth() {
-		// TODO Auto-generated method stub
 		return -1;
 	}
 	

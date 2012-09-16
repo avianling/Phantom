@@ -27,4 +27,12 @@ public interface ISprite {
 	 * @param y the y position
 	 */
 	public void draw( float x, float y );
+	
+	/**
+	 * A method to draw the sprite at a given position and rotation.
+	 * @param x The x position
+	 * @param y The y position
+	 * @param rotation The rotation of the sprite. 
+	 */
+	public void draw( float x, float y, float rotation);
 }

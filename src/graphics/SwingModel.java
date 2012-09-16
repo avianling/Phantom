@@ -10,6 +10,8 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +42,17 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		{
 			g2.drawImage(img, x, y, null);
 		}
+
+
+		public void drawImage(BufferedImage img, int x, int y, float rotation) {
+			// TODO : Improve the efficiency of this action.
+			//AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(rotation), 0,0); //img.getWidth()/2, img.getHeight()/2 );
+			AffineTransform tx = new AffineTransform();
+			tx.translate(x + img.getWidth()/2, y + img.getHeight()/2);
+			tx.rotate(Math.toRadians(rotation));
+			tx.translate(-img.getWidth()/2, -img.getHeight()/2);
+			g2.drawImage( img, tx, null );
+		}
 	}
 	
 	private IEventModel eventModel;
@@ -59,6 +72,11 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		} else {
 			System.out.println("Warning: image supplied is not valid.");
 		}
+	}
+	
+	public void drawImage(Object img, float x, float y, float rotation )
+	{
+		drawingArea.drawImage( (BufferedImage)img, (int)x, (int)y, rotation );
 	}
 	
 	public SwingModel() throws Exception

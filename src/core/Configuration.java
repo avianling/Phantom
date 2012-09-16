@@ -29,7 +29,7 @@ public class Configuration {
 		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
 		//Drawable thing2 = new BaseCollidable(16,16,32,32);
 		ImageDemo id = new ImageDemo();
-		id.setPosition(300, 300);
+		id.setPosition(100, 100);
 		MovementDemo copy1 = new MovementDemo();
 		MovementDemo copy2 = new MovementDemo();
 		//MovementDemo copy3 = new MovementDemo();

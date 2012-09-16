@@ -18,4 +18,6 @@ public interface IDisplayModel {
 	
 	// draws an image at the given position
 	public void drawImage( Object image, float x, float y );
+	
+	public void drawImage( Object image, float x, float y, float rotation);
 }

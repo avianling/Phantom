@@ -27,5 +27,11 @@ public class StaticSprite implements ISprite {
 	public void draw(float x, float y) {
 		Configuration.getDisplayModel().drawImage(_image, x, y);
 	}
+	
+	@Override
+	public void draw(float x, float y, float rotation )
+	{
+		Configuration.getDisplayModel().drawImage(_image, x, y, rotation);
+	}
 
 }

@@ -61,7 +61,6 @@ public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyLi
 	
 	@Override
 	public void KeyPressed(EKey key) {
-		// TODO Auto-generated method stub
 		if ( key == EKey.KeyLeft)
 		{
 			angularSpeed = 1.0;
@@ -74,7 +73,6 @@ public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyLi
 
 	@Override
 	public void KeyReleased(EKey key) {
-		// TODO Auto-generated method stub
 		if ( key == EKey.KeyLeft || key == EKey.KeyRight )
 		{
 			angularSpeed = 0;
@@ -83,7 +81,6 @@ public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyLi
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		Configuration.getDisplayModel().drawRectangle(X()-16, Y()-16, 32, 32 );
 	}
 

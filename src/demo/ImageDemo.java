@@ -15,6 +15,8 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 
 	private ISprite picture;
 	
+	private float _rotation;
+	
 	public ImageDemo()
 	{
 		super();
@@ -24,41 +26,39 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 		
 		picture = new AnimatedSprite("test.png",3);
 		Configuration.getWorldModel().add(this);
+		_rotation = 0;
 		
 	}
 
 	public void draw() {
 		//Configuration.getDisplayModel().drawImage(picture, X(), Y());
-		picture.draw(X(), Y());
+		picture.draw(X(), Y(), _rotation);
 	}
 	
 	public void step()
 	{
 		super.step();
-		picture.advance();
+		_rotation += 0.1;
+		//picture.advance();
 	}
 
 	@Override
 	public void collisionEvent(Collidable other) {
-		// TODO Auto-generated method stub
 		//System.out.println("A collision occured!");
 	}
 
 	@Override
 	public boolean collision(Collidable other) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean collision(float x, float y) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getDepth() {
-		// TODO Auto-generated method stub
 		return -1;
 	}
 	

@@ -34,7 +34,6 @@ public class BaseWorld implements IWorld, IKeyListener {
 	
 	@Override
 	public void add(Object obj) {
-		// TODO Auto-generated method stub
 		// here we are supposed to add an object to the world.
 		// determine what type it is and then add the object to the appropriate array
 		// of objects.
@@ -121,14 +120,12 @@ public class BaseWorld implements IWorld, IKeyListener {
 
 	@Override
 	public IWorld initalize() {
-		// TODO Auto-generated method stub
 		// do all the setup for the world
 		return null;
 	}
 
 	@Override
 	public void terminate() {
-		// TODO Auto-generated method stub
 		// cleanup the world.
 	}
 

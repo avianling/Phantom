@@ -4,7 +4,6 @@ public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
 	@Override
 	public int getDepth() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

@@ -7,7 +7,7 @@ import core.Configuration;
 
 public class CharsetSprite implements ISprite {
 
-	public int _frame;
+	public float _frame;
 	private int _animStart;
 	private int _animEnd;
 	private int _length;
@@ -17,6 +17,8 @@ public class CharsetSprite implements ISprite {
 	
 	private int _xTile;
 	private int _yTile;
+	
+	private float _speed;
 	
 	private int column, row;
 	
@@ -34,20 +36,30 @@ public class CharsetSprite implements ISprite {
 		_xTile = width / frameWidth;
 		_yTile = height / frameHeight;
 		_length = _xTile * _yTile;
+		
+		_speed = 20;
 	}
 	
 	@Override
 	public boolean advance() {
-		_frame++;
+		_frame = _frame + ( _speed / Configuration.getFPS() );
 		_frame = _frame % _length;
 		return _frame==0;
 	}
 
 	@Override
 	public void draw(float x, float y) {
-		column = (_frame % _xTile);
-		row = (_frame / _yTile);
+		column = ((int)_frame % _xTile);
+		row = ((int)_frame / _yTile);
 		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , x, y);
+	}
+	
+	@Override
+	public void draw(float x, float y, float rotation)
+	{
+		column = ((int)_frame % _xTile);
+		row = ((int)_frame / _yTile);
+		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , x, y, rotation);
 	}
 
 }

@@ -42,4 +42,8 @@ public class AnimatedSprite implements ISprite {
 		Configuration.getDisplayModel().drawImage(_frames[_frame], x, y);
 	}
 
+	@Override
+	public void draw(float x, float y, float rotation) {
+		Configuration.getDisplayModel().drawImage(_frames[_frame], x, y, rotation);
+	}
 }
