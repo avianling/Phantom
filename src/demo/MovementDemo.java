@@ -5,6 +5,7 @@ import core.Collidable;
 import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
+import core.EDrawingLayer;
 import input.EKey;
 import input.IKeyListener;
 
@@ -20,9 +21,8 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	}
 	
 	@Override
-	public int getDepth() {
-		// TODO Auto-generated method stub
-		return -5;
+	public EDrawingLayer getDepth() {
+		return EDrawingLayer.ground;
 	}
 	
 	@Override

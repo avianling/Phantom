@@ -7,6 +7,8 @@ import core.Collidable;
 import core.Configuration;
 import core.Drawable;
 import core.Dynamic;
+import core.EDrawingLayer;
+
 import java.lang.Math;
 
 public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyListener {
@@ -31,9 +33,8 @@ public class rosRotation extends BaseObject implements Dynamic, Drawable, IKeyLi
 	}
 	
 	@Override
-	public int getDepth() {
-		// TODO Auto-generated method stub
-		return -10;
+	public EDrawingLayer getDepth() {
+		return EDrawingLayer.background;
 	}
 	
 	@Override

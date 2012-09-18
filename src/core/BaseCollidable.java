@@ -3,8 +3,8 @@ package core;
 public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
 	@Override
-	public int getDepth() {
-		return 0;
+	public EDrawingLayer getDepth() {
+		return EDrawingLayer.ground;
 	}
 	
 	public void step()

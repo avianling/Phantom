@@ -1,6 +1,12 @@
 package core;
 
+/**
+ * DEPRECATED
+ * @author Alexander
+ *
+ */
 public class DrawableTreeNode {
+	/*
 	private DrawableTreeNode _left;
 	private DrawableTreeNode _right;
 	
@@ -14,11 +20,11 @@ public class DrawableTreeNode {
 		return ( _l == false && _r == false );
 	}
 	
-	private int getDepth()
+	private EDrawingLayer getDepth()
 	{
 		if ( value == null )
 		{
-			return 0;
+			return EDrawingLayer.ground;
 		} else {
 			return value.getDepth();
 		}
@@ -85,5 +91,5 @@ public class DrawableTreeNode {
 		}
 	}
 	
-	
+	*/
 }

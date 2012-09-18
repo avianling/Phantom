@@ -4,14 +4,19 @@ import input.EKey;
 import input.IKeyListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class BaseWorld implements IWorld, IKeyListener {
 
 	// a list of all of the things which are drawable in the game world.
 	//private ArrayList<Drawable> drawingList;
-	private DrawableTreeNode drawableTreeRoot;
+	//private DrawableTreeNode drawableTreeRoot;
 	private ArrayList<Collidable> collidableList;
 	private ArrayList<Dynamic> dynamicList;
+	
+	// A map relating each drawing layer key to a seperate list of drawings.
+	private HashMap<EDrawingLayer, List<Drawable> > drawingLayerMap;
 	
 	// the time at which the last frame was calculated.
 	private long nextTick;
@@ -20,9 +25,20 @@ public class BaseWorld implements IWorld, IKeyListener {
 	public BaseWorld()
 	{
 		//drawingList = new ArrayList<Drawable>();
-		drawableTreeRoot = new DrawableTreeNode();
+		//drawableTreeRoot = new DrawableTreeNode();
 		collidableList = new ArrayList<Collidable>();
 		dynamicList = new ArrayList<Dynamic>();
+		
+		drawingLayerMap = new HashMap<EDrawingLayer, List<Drawable> >();
+		// for each drawing layer which exists, create a list to hold the objects which are at that depth.
+		for ( EDrawingLayer layer : EDrawingLayer.values() )
+		{
+			System.out.println("Creating the list of drawable objects");
+			ArrayList list = new ArrayList< Drawable >();
+			drawingLayerMap.put(layer, list );
+		}
+		
+		drawingLayerMap.get(EDrawingLayer.background);
 		
 		// make this world an event listener.
 		//BaseEventModel.getEventModel().addListener(this);
@@ -40,8 +56,8 @@ public class BaseWorld implements IWorld, IKeyListener {
 		if ( Drawable.class.isInstance(obj) )
 		{
 			// add to the drawing list.
-			//drawingList.add((Drawable) obj );
-			drawableTreeRoot.add((Drawable)obj);
+			Drawable temp = (Drawable)obj;
+			drawingLayerMap.get(temp.getDepth()).add(temp);
 		}
 		
 		// if the object is collidable, the put it into the collidable list.
@@ -82,12 +98,17 @@ public class BaseWorld implements IWorld, IKeyListener {
 	}
 	
 	public void display() {
-		// TODO Fill out this function. should make all the drawable object draw themselves.
 		/*for ( Drawable e : drawingList )
 		{
 			e.draw();
 		}*/
-		drawableTreeRoot.draw();
+		for ( EDrawingLayer layer : EDrawingLayer.values() )
+		{
+			for ( Drawable d : drawingLayerMap.get(layer))
+			{
+				d.draw();
+			}
+		}
 	}
 	
 	@Override

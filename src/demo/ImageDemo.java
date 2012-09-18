@@ -5,6 +5,7 @@ import core.Collidable;
 import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
+import core.EDrawingLayer;
 import graphics.AnimatedSprite;
 import graphics.ISprite;
 import graphics.StaticSprite;
@@ -58,8 +59,8 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 	}
 
 	@Override
-	public int getDepth() {
-		return -1;
+	public EDrawingLayer getDepth() {
+		return EDrawingLayer.foreground;
 	}
 	
 }

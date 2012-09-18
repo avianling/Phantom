@@ -5,6 +5,7 @@ import core.Collidable;
 import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
+import core.EDrawingLayer;
 import graphics.AnimatedSprite;
 import graphics.CharsetSprite;
 import graphics.ISprite;
@@ -55,8 +56,8 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 	}
 
 	@Override
-	public int getDepth() {
-		return -1;
+	public EDrawingLayer getDepth() {
+		return EDrawingLayer.background;
 	}
 	
 }
