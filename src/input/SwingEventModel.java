@@ -201,7 +201,10 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Not Currently Supported.
+		for ( IMouseListener l : mouseListeners )
+		{
+			l.mouseMoved( arg0.getX(), arg0.getY() );
+		}
 	}
 
 

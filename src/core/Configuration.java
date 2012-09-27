@@ -5,6 +5,7 @@ import input.IMouseListener;
 import input.SwingEventModel;
 import demo.*;
 import java.lang.reflect.*;
+import physics.*;
 
 public class Configuration {
 
@@ -29,19 +30,21 @@ public class Configuration {
 		
 		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
 		//Drawable thing2 = new BaseCollidable(16,16,32,32);
-		ImageDemo id = new ImageDemo();
-		id.setPosition(100, 100);
-		MovementDemo copy1 = new MovementDemo();
-		MovementDemo copy2 = new MovementDemo();
+		//ImageDemo id = new ImageDemo();
+		//id.setPosition(100, 100);
+		//MovementDemo copy1 = new MovementDemo();
+		//MovementDemo copy2 = new MovementDemo();
 		//MovementDemo copy3 = new MovementDemo();
 		//MovementDemo copy4 = new MovementDemo();
 		
-		CharsetDemo cd = new CharsetDemo();
-		cd.setPosition(100,300);
+		//CharsetDemo cd = new CharsetDemo();
+		//cd.setPosition(100,300);
+		
+		Vector v = new Vector(2,2);
+		FollowingNode n = new FollowingNode(v);
 		
 		
-		
-		copy2.setPosition(128, 128+1*48);
+		//copy2.setPosition(128, 128+1*48);
 		//copy3.setPosition(128, 128+2*48);
 		//copy4.setPosition(128, 128+3*48);
 		
