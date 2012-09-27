@@ -2,20 +2,25 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SwingEventModel implements KeyListener, IEventModel {
+public class SwingEventModel implements KeyListener, IEventModel, MouseListener, MouseMotionListener {
 	
 	private HashMap<Integer, EKey> keyMapping;
 	
 	private ArrayList<IKeyListener> keyListeners;
+	private ArrayList<IMouseListener> mouseListeners;
 	protected static SwingEventModel singleton;
 	
 	public SwingEventModel()
 	{
 		// initalize the array of listeners.
 		keyListeners = new ArrayList<IKeyListener>();
+		mouseListeners = new ArrayList<IMouseListener>();
 		
 		// setup the mapping from swingEventsCodes to EKey codes.
 		keyMapping = new HashMap<Integer, EKey>();
@@ -54,12 +59,9 @@ public class SwingEventModel implements KeyListener, IEventModel {
 	
 	
 	@Override
-	public void addListener(Object o) {
+	public void addKeyListener(IKeyListener o) {
 		// if the object is a key listener, add it to the key listeners list.
-		if ( IKeyListener.class.isInstance(o) )
-		{
-			keyListeners.add((IKeyListener)o);
-		}
+		keyListeners.add(o);
 	}
 	
 	
@@ -81,15 +83,22 @@ public class SwingEventModel implements KeyListener, IEventModel {
 	}
 
 	@Override
-	public void removeListener(Object o) {
-		if ( IKeyListener.class.isInstance(o) )
-		{
-			keyListeners.remove((IKeyListener)o);
-		}
+	public void removeKeyListener(IKeyListener o) {
+			keyListeners.remove(o);
 	}
 
 	
+	@Override
+	public void addMouseListener(IMouseListener listener)
+	{
+		mouseListeners.add(listener);
+	}
 	
+	@Override
+	public void removeMouseListener(IMouseListener listener)
+	{
+		mouseListeners.remove(listener);
+	}
 	
 	
 	@Override
@@ -115,6 +124,94 @@ public class SwingEventModel implements KeyListener, IEventModel {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		//System.out.println("A key has been typed");
+		// TODO Not Currently Supported.
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// Not implemented at this point.
+		// is encapsulated by the mousePressed and mouseReleased events.
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Not Currently Supported.
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Not Currently Supported.
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// Extract the x,y coords of the event.
+		int x, y;
+		x = arg0.getX();
+		y = arg0.getY();
+		
+		// Check if it is a left click or right click.
+		if (arg0.getButton() == 1)
+		{
+			for ( IMouseListener l : mouseListeners )
+			{
+				l.leftPressed(x,y);
+			}
+		}
+		
+		if (arg0.getButton() == 2 )
+		{
+			for ( IMouseListener l : mouseListeners )
+			{
+				l.rightPressed(x, y);
+			}
+		}
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// Extract the x,y coords of the event.
+		int x, y;
+		x = arg0.getX();
+		y = arg0.getY();
+		
+		// Check if it is a left click or right click.
+		if (arg0.getButton() == 1)
+		{
+			for ( IMouseListener l : mouseListeners )
+			{
+				l.leftReleased(x,y);
+			}
+		}
+		
+		if (arg0.getButton() == 2 )
+		{
+			for ( IMouseListener l : mouseListeners )
+			{
+				l.rightReleased(x, y);
+			}
+		}
+	}
+
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Not Currently Supported.
+	}
+
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// Notify everyone about the movement!
+		for ( IMouseListener l : mouseListeners )
+		{
+			l.mouseMoved( arg0.getX(), arg0.getY() );
+		}
 	}
 	
 }

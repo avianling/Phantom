@@ -1,6 +1,7 @@
 package core;
 import graphics.*;
 import input.IEventModel;
+import input.IMouseListener;
 import input.SwingEventModel;
 import demo.*;
 import java.lang.reflect.*;
@@ -12,18 +13,18 @@ public class Configuration {
 	
 	public static void main( String [] args )
 	{
-		System.out.println("Hello World!");
-		
 		width = 640;
 		height = 480;
 		
 		try {
+			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
 			worldModel = new BaseWorld();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
-			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
+			
+			worldModel.initalize();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);

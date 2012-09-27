@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class BaseEventModel implements IEventModel {
 
 	private ArrayList<IKeyListener> keyListeners;
+	private ArrayList<IMouseListener> mouseListeners;
 	
 	protected static IEventModel singleton;
 	
@@ -26,15 +27,13 @@ public class BaseEventModel implements IEventModel {
 	public BaseEventModel()
 	{
 		keyListeners = new ArrayList<IKeyListener>();
+		mouseListeners = new ArrayList<IMouseListener>();
 	}
 	
 	@Override
-	public void addListener(Object o) {
+	public void addKeyListener(IKeyListener o) {
 		// if the object is a key listener, add it to the key listeners list.
-		if ( IKeyListener.class.isInstance(o) )
-		{
-			keyListeners.add((IKeyListener)o);
-		}
+		keyListeners.add((IKeyListener)o);
 	}
 	
 	
@@ -55,15 +54,22 @@ public class BaseEventModel implements IEventModel {
 	}
 
 	@Override
-	public void removeListener(Object o) {
-		if ( IKeyListener.class.isInstance(o) )
-		{
-			keyListeners.remove((IKeyListener)o);
-		}
+	public void removeKeyListener(IKeyListener o) {
+		keyListeners.remove((IKeyListener)o);
 	}
 	
 	
+	@Override
+	public void addMouseListener(IMouseListener listener )
+	{
+		mouseListeners.add(listener);
+	}
 	
+	@Override
+	public void removeMouseListener( IMouseListener listener )
+	{
+		mouseListeners.remove(listener);
+	}
 	
 	
 }

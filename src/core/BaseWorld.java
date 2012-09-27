@@ -2,12 +2,13 @@ package core;
 
 import input.EKey;
 import input.IKeyListener;
+import input.IMouseListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BaseWorld implements IWorld, IKeyListener {
+public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 
 	// a list of all of the things which are drawable in the game world.
 	//private ArrayList<Drawable> drawingList;
@@ -41,8 +42,7 @@ public class BaseWorld implements IWorld, IKeyListener {
 		drawingLayerMap.get(EDrawingLayer.background);
 		
 		// make this world an event listener.
-		//BaseEventModel.getEventModel().addListener(this);
-		initalize();
+		//Configuration.getEventModel().addKeyListener(this);		
 		
 		millisPerFrame = 1000 / Configuration.getFPS();
 		nextTick = System.currentTimeMillis()+millisPerFrame;
@@ -75,7 +75,13 @@ public class BaseWorld implements IWorld, IKeyListener {
 		// if the object is able to receive key input, add it to the event listeners observers list.
 		if ( IKeyListener.class.isInstance(obj) )
 		{
-			Configuration.getEventModel().addListener(obj);
+			Configuration.getEventModel().addKeyListener((IKeyListener)obj);
+		}
+		
+		// if the object is listening for mouse input, register it as a mouse listener.
+		if ( IMouseListener.class.isInstance(obj) )
+		{
+			Configuration.getEventModel().addMouseListener((IMouseListener)obj);
 		}
 	}
 	
@@ -142,6 +148,8 @@ public class BaseWorld implements IWorld, IKeyListener {
 	@Override
 	public IWorld initalize() {
 		// do all the setup for the world
+		Configuration.getEventModel().addMouseListener(this);
+		
 		return null;
 	}
 
@@ -156,5 +164,29 @@ public class BaseWorld implements IWorld, IKeyListener {
 
 	@Override
 	public void KeyReleased(EKey key) {}
+
+	@Override
+	public void leftPressed(int mouseX, int mouseY) {}
+
+	@Override
+	public void leftReleased(int mouseX, int mouseY) {}
+
+	@Override
+	public void rightPressed(int mouseX, int mouseY) {}
+
+	@Override
+	public void rightReleased(int mouseX, int mouseY) {}
+
+	// Variables for holding the mouse positions.
+	private int _mouseX, _mouseY;
+	
+	public int mouseX() { return _mouseX; };
+	public int mouseY() { return _mouseY; };
+	
+	@Override
+	public void mouseMoved(int mouseX, int mouseY) {
+		_mouseX = mouseX;
+		_mouseY = mouseY;
+	}
 
 }

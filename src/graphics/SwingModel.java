@@ -10,6 +10,8 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -96,6 +98,8 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		
 		addWindowListener(new SwingExitListener());
 		addKeyListener((KeyListener) eventModel);
+		addMouseListener((MouseListener) eventModel);
+		addMouseMotionListener((MouseMotionListener) eventModel);
 		
 		Container content = getContentPane();
 		

@@ -7,6 +7,12 @@ package input;
  *
  */
 public interface IEventModel {
-	public void addListener( Object o );
-	public void removeListener( Object o );
+	
+	// changed these to describe key listeners
+	// so that there is a distinction between key and mouse listeners.
+	public void addKeyListener( IKeyListener o );
+	public void removeKeyListener( IKeyListener o );
+	
+	public void addMouseListener( IMouseListener listener );
+	public void removeMouseListener( IMouseListener listener );
 }
