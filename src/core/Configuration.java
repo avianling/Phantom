@@ -55,6 +55,7 @@ public class Configuration {
 		// Make a block for the player to stand on.
 		StaticBlock floor = new StaticBlock(0,400,640,80);
 		new StaticBlock(400, 300, 240, 20);
+		new StaticBlock(200, 200, 240, 35);
 		
 		while (true)
 		{

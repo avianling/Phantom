@@ -47,6 +47,7 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 		{
 			// A crude way of jumping - give us a high upwards velocity.
 			_dY = - 8;
+			canJump = false;
 			jumpingCountdown = 8;
 		}
 	}
