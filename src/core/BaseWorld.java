@@ -93,10 +93,14 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			for ( int i=start; i < collidableList.size(); i++ )
 			{
 				Collidable right = collidableList.get(i);
-				if ( left.collision(right) )
+				// Manual overright to prevent objects colliding with themselves.
+				if ( left != right ) 
 				{
-					left.collisionEvent(right);
-					right.collisionEvent(left);
+					if ( left.collision(right) )
+					{
+						left.collisionEvent(right);
+						right.collisionEvent(left);
+					}
 				}
 			}
 			start++;
