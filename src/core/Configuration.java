@@ -18,7 +18,7 @@ public class Configuration {
 		height = 480;
 		
 		try {
-			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
+			contentManager = new ContentManager("D:\\Phantom\\Media\\");
 			worldModel = new BaseWorld();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
@@ -63,11 +63,16 @@ public class Configuration {
 		//copy2.setPosition(128, 128+1*48);
 		//copy3.setPosition(128, 128+2*48);
 		//copy4.setPosition(128, 128+3*48);
+
+
+		//DEMO Stuff
 		
+		PlayerDemo player = new PlayerDemo();
 		
-		//new rosRotation();
-		
-		//worldModel.simulate();
+		// Make a block for the player to stand on.
+		StaticBlock floor = new StaticBlock(0,400,640,80);
+		new StaticBlock(400, 300, 240, 20);
+		new StaticBlock(200, 200, 240, 35);
 		
 		
 		
