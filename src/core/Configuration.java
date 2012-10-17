@@ -40,9 +40,27 @@ public class Configuration {
 		//CharsetDemo cd = new CharsetDemo();
 		//cd.setPosition(100,300);
 		
-		Vector v = new Vector(2,2);
-		FollowingNode n = new FollowingNode(v);
+		//Vector v = new Vector(2,2);
+		//FollowingNode n = new FollowingNode(v);
 		
+		Vector[] points = new Vector[1];
+		points[0] = new Vector(2,3);
+		//Polygon p = new Polygon(points);
+		
+		
+		//TODO: FIX this stuff below:
+		
+		Vector[] pts = new Vector[4];
+		pts[0] = new Vector(0,0);
+		pts[1] = new Vector(30,0);
+		pts[2] = new Vector(30,30);
+		pts[3] = new Vector(0,30);
+		Polygon p2 = new Polygon(pts);
+		
+		//System.out.println("test");
+		//System.out.println(p2.collision(p));
+		
+		//TODO until here.
 		
 		//copy2.setPosition(128, 128+1*48);
 		//copy3.setPosition(128, 128+2*48);
