@@ -60,8 +60,6 @@ public class Configuration {
 		//System.out.println("test");
 		//System.out.println(p2.collision(p));
 		
-		//TODO until here.
-		
 		//copy2.setPosition(128, 128+1*48);
 		//copy3.setPosition(128, 128+2*48);
 		//copy4.setPosition(128, 128+3*48);
