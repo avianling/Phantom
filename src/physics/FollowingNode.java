@@ -12,9 +12,9 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 	private Vector _p,a,b,c,d,start;
 	
 	// Contains a point P, moves that point so that it is always at the mouse point.
-	public FollowingNode( Vector p )
+	public FollowingNode()
 	{
-		_p = p;
+		_p = new Vector(2,2);
 		Configuration.getWorldModel().add(this);
 		a = new Vector(100,100);
 		b = new Vector(220,200);
@@ -67,14 +67,6 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 	@Override
 	public void step()
 	{
-		/*int v1 = (int)_p.subtract(a).cross(b.subtract(a));
-		int v2 = (int)_p.subtract(b).cross(c.subtract(b));
-		int v3 = (int)_p.subtract(c).cross(d.subtract(c));
-		int v4 = (int)_p.subtract(d).cross(a.subtract(d));
-		
-		System.out.println("|" + (v1<=0) + "|" + (v2<=0) + "|" + (v3<=0) + "|" + (v4<=0) + "|");*/
-		
-		// dp projection values
 		int val = (int)_p.subtract(b).cross(c.subtract(b));
 	}
 

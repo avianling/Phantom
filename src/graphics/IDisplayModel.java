@@ -20,4 +20,6 @@ public interface IDisplayModel {
 	public void drawImage( Object image, float x, float y );
 	
 	public void drawImage( Object image, float x, float y, float rotation);
+	
+	public void drawLine(float X1, float Y1, float X2, float Y2 );
 }

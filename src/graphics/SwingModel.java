@@ -44,7 +44,12 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		{
 			g2.drawImage(img, x, y, null);
 		}
-
+		
+		
+		public void drawLine( float X1, float Y1, float X2, float Y2 )
+		{
+			g2.drawLine((int)X1, (int)Y1, (int)X2, (int)Y2);
+		}
 
 		public void drawImage(BufferedImage img, int x, int y, float rotation) {
 			// TODO : Improve the efficiency of this action.
@@ -79,6 +84,11 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	public void drawImage(Object img, float x, float y, float rotation )
 	{
 		drawingArea.drawImage( (BufferedImage)img, (int)x, (int)y, rotation );
+	}
+	
+	public void drawLine( float X1, float Y1, float X2, float Y2 )
+	{
+		drawingArea.drawLine(X1, Y1, X2, Y2);
 	}
 	
 	public SwingModel() throws Exception

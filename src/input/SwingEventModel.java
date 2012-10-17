@@ -16,6 +16,10 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 	private ArrayList<IMouseListener> mouseListeners;
 	protected static SwingEventModel singleton;
 	
+	// some offsets for the mouse?
+	int xOffset;
+	int yOffset;
+	
 	public SwingEventModel()
 	{
 		// initalize the array of listeners.
@@ -55,6 +59,9 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 		keyMapping.put(88, EKey.Key_x);
 		keyMapping.put(89, EKey.Key_y);
 		keyMapping.put(90, EKey.Key_z);
+		
+		xOffset = -8;
+		yOffset = -30;
 	}
 	
 	
@@ -151,8 +158,8 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 	public void mousePressed(MouseEvent arg0) {
 		// Extract the x,y coords of the event.
 		int x, y;
-		x = arg0.getX();
-		y = arg0.getY();
+		x = arg0.getX() + xOffset;
+		y = arg0.getY() + yOffset;
 		
 		// Check if it is a left click or right click.
 		if (arg0.getButton() == 1)
@@ -163,7 +170,9 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 			}
 		}
 		
-		if (arg0.getButton() == 2 )
+		// button code 2 is for middle mouse button?
+		
+		if (arg0.getButton() == 3 )
 		{
 			for ( IMouseListener l : mouseListeners )
 			{
@@ -177,8 +186,8 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 	public void mouseReleased(MouseEvent arg0) {
 		// Extract the x,y coords of the event.
 		int x, y;
-		x = arg0.getX();
-		y = arg0.getY();
+		x = arg0.getX() + xOffset;
+		y = arg0.getY() + yOffset;
 		
 		// Check if it is a left click or right click.
 		if (arg0.getButton() == 1)
@@ -189,7 +198,7 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 			}
 		}
 		
-		if (arg0.getButton() == 2 )
+		if (arg0.getButton() == 3 )
 		{
 			for ( IMouseListener l : mouseListeners )
 			{
@@ -203,7 +212,7 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 	public void mouseDragged(MouseEvent arg0) {
 		for ( IMouseListener l : mouseListeners )
 		{
-			l.mouseMoved( arg0.getX(), arg0.getY() );
+			l.mouseMoved( arg0.getX() + xOffset, arg0.getY() + yOffset );
 		}
 	}
 
@@ -213,7 +222,7 @@ public class SwingEventModel implements KeyListener, IEventModel, MouseListener,
 		// Notify everyone about the movement!
 		for ( IMouseListener l : mouseListeners )
 		{
-			l.mouseMoved( arg0.getX(), arg0.getY() );
+			l.mouseMoved( arg0.getX() + xOffset, arg0.getY() + yOffset );
 		}
 	}
 	
