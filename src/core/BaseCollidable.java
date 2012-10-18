@@ -1,5 +1,7 @@
 package core;
 
+import math.Vector;
+
 public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
 	@Override
@@ -15,9 +17,9 @@ public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	public BaseCollidable()
 	{
 		super();
-		setPosition(0,0);
-		setSpeed(0,0);
-		setBounds(32,32);
+		setPosition(new Vector(0,0));
+		setSpeed(new Vector(0,0));
+		setBounds(new Vector(32,32));
 		Configuration.getWorldModel().add(this);
 	}
 	
@@ -25,15 +27,15 @@ public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	{
 		super();
 		Configuration.getWorldModel().add(this);
-		setPosition(x,y);
-		setBounds((int)w,(int)h);
+		setPosition(new Vector(x,y));
+		setBounds(new Vector((int)w,(int)h));
 		Configuration.getWorldModel().add(this);
 	}
 
 	@Override
 	public void draw() {
 		//System.out.println("Draw method called for base collidable.");
-		Configuration.getDisplayModel().drawRectangle(X(),Y(),W(),H());
+		Configuration.getDisplayModel().drawRectangle(position(),bounds());
 	}
 
 	@Override
@@ -43,7 +45,14 @@ public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 
 	@Override
 	public boolean collision(float x, float y) {
-		if ( x > X() && y > Y() && x < (X()+W()) && y < (Y()+H()) )
+		float X, Y, W, H;
+		X = (float) position().X;
+		Y = (float) position().Y;
+		W = (float) bounds().X;
+		H = (float) bounds().Y;
+		
+		
+		if ( x > X && y > Y && x < (X+W) && y < (Y+H) )
 		{
 			return true;
 		}
@@ -53,19 +62,25 @@ public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 
 	// Broken.
 	public boolean collision(Collidable other) {
+		float X, Y, W, H;
+		X = (float) position().X;
+		Y = (float) position().Y;
+		W = (float) bounds().X;
+		H = (float) bounds().Y;
+		
 		// check if a collision occurs between this object and the other.
 		
 		// first check that the other object is one which we can collide with.
 		if (Collidable.class.isInstance(other))
 		{	
-			float otherX = other.X() - X();
-			float otherY = other.Y() - Y();
+			float otherX = other.position().X - X;
+			float otherY = other.position().Y - Y;
 			
 			// if their start position is within our bounds, we collide.
-			if ( otherY > H() ) { return false;}
-			if ( otherX > W() ) { return false;}
-			if ( otherX < -other.W() ) { return false; }
-			if ( otherY < -other.H() ) { return false; }
+			if ( otherY > H ) { return false;}
+			if ( otherX > W ) { return false;}
+			if ( otherX < -other.bounds().X ) { return false; }
+			if ( otherY < -other.bounds().Y ) { return false; }
 			
 			return true;
 		}

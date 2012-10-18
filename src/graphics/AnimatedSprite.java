@@ -2,6 +2,8 @@ package graphics;
 
 import java.awt.Image;
 
+import math.Vector;
+
 import core.Configuration;
 
 public class AnimatedSprite implements ISprite {
@@ -38,12 +40,12 @@ public class AnimatedSprite implements ISprite {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		Configuration.getDisplayModel().drawImage(_frames[_frame], x, y);
+	public void draw(Vector position) {
+		Configuration.getDisplayModel().drawImage(_frames[_frame], position);
 	}
 
 	@Override
-	public void draw(float x, float y, float rotation) {
-		Configuration.getDisplayModel().drawImage(_frames[_frame], x, y, rotation);
+	public void draw(Vector position, float rotation) {
+		Configuration.getDisplayModel().drawImage(_frames[_frame], position, rotation);
 	}
 }

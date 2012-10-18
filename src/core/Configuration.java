@@ -5,6 +5,7 @@ import input.IMouseListener;
 import input.SwingEventModel;
 import demo.*;
 import java.lang.reflect.*;
+import physics.*;
 
 public class Configuration {
 
@@ -17,7 +18,7 @@ public class Configuration {
 		height = 480;
 		
 		try {
-			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
+			contentManager = new ContentManager("D:\\Phantom\\Media\\");
 			worldModel = new BaseWorld();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
@@ -29,26 +30,29 @@ public class Configuration {
 		
 		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
 		//Drawable thing2 = new BaseCollidable(16,16,32,32);
-		ImageDemo id = new ImageDemo();
-		id.setPosition(100, 100);
-		MovementDemo copy1 = new MovementDemo();
-		MovementDemo copy2 = new MovementDemo();
+		//ImageDemo id = new ImageDemo();
+		//id.setPosition(100, 100);
+		//MovementDemo copy1 = new MovementDemo();
+		//MovementDemo copy2 = new MovementDemo();
 		//MovementDemo copy3 = new MovementDemo();
 		//MovementDemo copy4 = new MovementDemo();
 		
-		CharsetDemo cd = new CharsetDemo();
-		cd.setPosition(100,300);
+		//CharsetDemo cd = new CharsetDemo();
+		//cd.setPosition(100,300);
 		
+		//FollowingNode n = new FollowingNode();
+
+
+		//DEMO Stuff
 		
+		PlayerDemo player = new PlayerDemo();
 		
-		copy2.setPosition(128, 128+1*48);
-		//copy3.setPosition(128, 128+2*48);
-		//copy4.setPosition(128, 128+3*48);
+		// Make a block for the player to stand on.
+		StaticBlock floor = new StaticBlock(0,400,640,80);
+		new StaticBlock(400, 300, 240, 20);
+		new StaticBlock(200, 200, 240, 35);
 		
-		
-		//new rosRotation();
-		
-		//worldModel.simulate();
+		LineCollisionChecker test = new LineCollisionChecker();
 		
 		
 		
