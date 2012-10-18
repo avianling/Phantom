@@ -1,5 +1,6 @@
 package demo;
 
+import math.Vector;
 import core.BaseObject;
 import core.Collidable;
 import core.Dynamic;
@@ -20,9 +21,9 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 	public CharsetDemo()
 	{
 		super();
-		setPosition(128,128);
-		setBounds(32,32);
-		setSpeed(0,0);
+		setPosition(new Vector(128,128));
+		setBounds(new Vector(32,32));
+		setSpeed(new Vector(0,0));
 		
 		picture = new CharsetSprite("test.bmp",128,128);
 		Configuration.getWorldModel().add(this);
@@ -31,7 +32,7 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 
 	public void draw() {
 		//Configuration.getDisplayModel().drawImage(picture, X(), Y());
-		picture.draw(X(), Y());
+		picture.draw(position());
 	}
 	
 	public void step()

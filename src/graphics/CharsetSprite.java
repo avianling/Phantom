@@ -3,6 +3,8 @@ package graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import math.Vector;
+
 import core.Configuration;
 
 public class CharsetSprite implements ISprite {
@@ -48,18 +50,18 @@ public class CharsetSprite implements ISprite {
 	}
 
 	@Override
-	public void draw(float x, float y) {
+	public void draw(Vector position) {
 		column = ((int)_frame % _xTile);
 		row = ((int)_frame / _yTile);
-		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , x, y);
+		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , position);
 	}
 	
 	@Override
-	public void draw(float x, float y, float rotation)
+	public void draw(Vector position, float rotation)
 	{
 		column = ((int)_frame % _xTile);
 		row = ((int)_frame / _yTile);
-		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , x, y, rotation);
+		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , position, rotation);
 	}
 
 }
