@@ -1,5 +1,7 @@
 package physics;
 
+import math.Vector;
+
 public class CollTest {
 
 	/**

@@ -2,6 +2,8 @@ package graphics;
 
 import java.awt.Image;
 
+import math.Vector;
+
 import core.Configuration;
 
 public class StaticSprite implements ISprite {
@@ -24,14 +26,14 @@ public class StaticSprite implements ISprite {
 	}
 
 	@Override
-	public void draw(float x, float y) {
-		Configuration.getDisplayModel().drawImage(_image, x, y);
+	public void draw(Vector position) {
+		Configuration.getDisplayModel().drawImage(_image, position);
 	}
 	
 	@Override
-	public void draw(float x, float y, float rotation )
+	public void draw(Vector position, float rotation )
 	{
-		Configuration.getDisplayModel().drawImage(_image, x, y, rotation);
+		Configuration.getDisplayModel().drawImage(_image, position, rotation);
 	}
 
 }

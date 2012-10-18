@@ -8,6 +8,8 @@ import input.SwingEventModel;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import math.Vector;
+
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -66,29 +68,29 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	
 	private myPanel drawingArea;
 	
-	public void drawRectangle( float x, float y, float w, float h )
+	public void drawRectangle( Vector position, Vector bounds )
 	{
-		drawingArea.drawRectangle((int)x, (int)y, (int)w, (int)h);
+		drawingArea.drawRectangle((int)position.X, (int)position.Y, (int)bounds.X, (int)bounds.Y);
 	}
 	
-	public void drawImage( Object img, float x, float y )
+	public void drawImage( Object img, Vector position )
 	{
 		if ( BufferedImage.class.isInstance(img) )
 		{
-			drawingArea.drawImage( (BufferedImage)img, (int)x, (int)y );
+			drawingArea.drawImage( (BufferedImage)img, (int)position.X, (int)position.Y );
 		} else {
 			System.out.println("Warning: image supplied is not valid.");
 		}
 	}
 	
-	public void drawImage(Object img, float x, float y, float rotation )
+	public void drawImage(Object img, Vector position, float rotation )
 	{
-		drawingArea.drawImage( (BufferedImage)img, (int)x, (int)y, rotation );
+		drawingArea.drawImage( (BufferedImage)img, (int)position.X, (int)position.Y, rotation );
 	}
 	
-	public void drawLine( float X1, float Y1, float X2, float Y2 )
+	public void drawLine( Vector start, Vector end )
 	{
-		drawingArea.drawLine(X1, Y1, X2, Y2);
+		drawingArea.drawLine((int)start.X, (int)start.Y, (int)end.X, (int)end.Y);
 	}
 	
 	public SwingModel() throws Exception

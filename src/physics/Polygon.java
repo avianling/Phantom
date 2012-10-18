@@ -1,5 +1,7 @@
 package physics;
 
+import math.Vector;
+
 public class Polygon implements CollisionBody {
 
 	// Our origonal coordinates.
@@ -44,10 +46,10 @@ public class Polygon implements CollisionBody {
 		int i=0;
 		for ( Vector v : _originalPoints )
 		{
-			double newX, newY;
+			float newX, newY;
 			
-			newX = _xscale * v.X * Math.cos(_yrotation) - _xscale * v.Y * Math.sin(_yrotation) + _position.X;
-			newY = _yscale * v.X * Math.sin(_yrotation) + _yscale * v.Y * Math.cos(_yrotation) + _position.Y;
+			newX = (float)(_xscale * v.X * Math.cos(_yrotation) - _xscale * v.Y * Math.sin(_yrotation) + _position.X);
+			newY = (float)(_yscale * v.X * Math.sin(_yrotation) + _yscale * v.Y * Math.cos(_yrotation) + _position.Y);
 			
 			_transformedPoints[i] = new Vector(newX, newY);
 			i++;

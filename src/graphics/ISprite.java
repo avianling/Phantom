@@ -1,5 +1,7 @@
 package graphics;
 
+import math.Vector;
+
 /**
  * Animation is an interface for animated sprites.
  * 
@@ -26,7 +28,7 @@ public interface ISprite {
 	 * @param x the x position
 	 * @param y the y position
 	 */
-	public void draw( float x, float y );
+	public void draw( Vector position );
 	
 	/**
 	 * A method to draw the sprite at a given position and rotation.
@@ -34,5 +36,5 @@ public interface ISprite {
 	 * @param y The y position
 	 * @param rotation The rotation of the sprite. 
 	 */
-	public void draw( float x, float y, float rotation);
+	public void draw( Vector position, float rotation);
 }

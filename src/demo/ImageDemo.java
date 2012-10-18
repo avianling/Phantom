@@ -1,5 +1,6 @@
 package demo;
 
+import math.Vector;
 import core.BaseObject;
 import core.Collidable;
 import core.Dynamic;
@@ -21,9 +22,9 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 	public ImageDemo()
 	{
 		super();
-		setPosition(128,128);
-		setBounds(32,32);
-		setSpeed(0,0);
+		setPosition(new Vector(128,128));
+		setBounds(new Vector(32,32));
+		setSpeed(new Vector(0,0));
 		
 		picture = new AnimatedSprite("test.png",3);
 		Configuration.getWorldModel().add(this);
@@ -33,7 +34,7 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 
 	public void draw() {
 		//Configuration.getDisplayModel().drawImage(picture, X(), Y());
-		picture.draw(X(), Y(), _rotation);
+		picture.draw(position(), _rotation);
 	}
 	
 	public void step()

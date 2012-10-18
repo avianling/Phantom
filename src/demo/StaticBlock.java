@@ -1,5 +1,6 @@
 package demo;
 
+import math.Vector;
 import core.BaseObject;
 import core.Collidable;
 import core.Configuration;
@@ -11,20 +12,19 @@ public class StaticBlock extends BaseObject implements Collidable, Drawable {
 
 	public StaticBlock( float x, float y, int w, int h )
 	{
-		setPosition(x,y);
-		setBounds(w,h);
+		setPosition(new Vector(x,y));
+		setBounds(new Vector(w,h));
 		
 		Configuration.getWorldModel().add(this);
 	}
 	
 	@Override
 	public void draw() {
-		Configuration.getDisplayModel().drawRectangle(X(), Y(), W(), H());
+		Configuration.getDisplayModel().drawRectangle(position(), bounds());
 	}
 
 	@Override
 	public EDrawingLayer getDepth() {
-		// TODO Auto-generated method stub
 		return EDrawingLayer.background;
 	}
 
@@ -41,15 +41,15 @@ public class StaticBlock extends BaseObject implements Collidable, Drawable {
 		{
 			GameObject o = (GameObject)other;
 			
-			double xmin = X();
-			double ymin = Y();
-			double xmax = X() + W();
-			double ymax = Y() + H();
+			double xmin = position().X;
+			double ymin = position().Y;
+			double xmax = position().X + bounds().X;
+			double ymax = position().Y + bounds().Y;
 			
-			double oxmin = o.X();
-			double oymin = o.Y();
-			double oxmax = o.X() + o.W();
-			double oymax = o.Y() + o.H();
+			double oxmin = o.position().X;
+			double oymin = o.position().Y;
+			double oxmax = o.position().X + o.bounds().X;
+			double oymax = o.position().Y + o.bounds().Y;
 			
 			if ( oxmax < xmin ) { return false; }; // if the other is to the right of us, no collision
 			if ( oxmin > xmax ) { return false; }; // if the other is to the left ....
@@ -63,14 +63,15 @@ public class StaticBlock extends BaseObject implements Collidable, Drawable {
 
 	@Override
 	public boolean collision(float x, float y) {
-		if ( x > _X && x < ( _X + _width ) && y > _Y && y < ( _Y + _height ) )
+		/*if ( x > _X && x < ( _X + _width ) && y > _Y && y < ( _Y + _height ) )
 		{
 			return true;
 		}
 		else 
 		{
 			return false;
-		}
+		}*/
+		return false;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package physics;
 
+import math.Vector;
 import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
@@ -23,21 +24,24 @@ public class LineCollisionChecker implements Drawable {
 		v1 = new Vector(0,0);
 		v2 = new Vector(0,0);
 		
-		A.setPosition(50,50);
-		B.setPosition(150, 150);
-		C.setPosition(150, 50);
-		D.setPosition(50, 150);
+		A.setPosition(new Vector(50,50));
+		B.setPosition(new Vector(150, 150));
+		C.setPosition(new Vector(150, 50));
+		D.setPosition(new Vector(50, 150));
 	}
 
 	@Override
 	public void draw() {
-		Configuration.getDisplayModel().drawLine( A.X(), A.Y(),B.X(), B.Y() );
-		Configuration.getDisplayModel().drawLine(C.X(), C.Y(), D.X(), D.Y() );
+		Configuration.getDisplayModel().drawLine( A.position(),B.position() );
+		Configuration.getDisplayModel().drawLine(C.position(), D.position() );
 		
-		v1.X = B.X() - A.X();
-		v1.Y = B.Y() - A.Y();
-		v2.X = D.X() - C.X();
-		v2.Y = D.Y() - C.Y();
+		/*v1.X = B.position().X - A.position().X;
+		v1.Y = B.position().Y - A.position().Y;
+		v2.X = D.position().X - C.position().X;
+		v2.Y = D.position().Y - C.position().Y;*/
+		
+		v1 = B.position().subtract(A.position());
+		v2 = D.position().subtract(C.position());
 		
 		float dp = (float) v1.dot(v2);
 		System.out.println(dp);

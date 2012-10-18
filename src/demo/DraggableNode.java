@@ -1,5 +1,6 @@
 package demo;
 
+import math.Vector;
 import input.IMouseListener;
 import core.BaseObject;
 import core.Configuration;
@@ -13,18 +14,18 @@ public class DraggableNode extends BaseObject implements Drawable, IMouseListene
 	public DraggableNode()
 	{
 		_dragging = false;
-		setPosition(20, 20);
-		setBounds(20,20);
+		setPosition(new Vector(20, 20));
+		setBounds(new Vector(20,20));
 		
 		Configuration.getWorldModel().add(this);
 	}
 	
 	@Override
 	public void leftPressed(int mouseX, int mouseY) {
-		int left = (int) (X() - 0.5*W());
-		int right = (int) (left + W());
-		int top = (int) (Y() - 0.5*H());
-		int bottom = (int) (top + H());
+		int left = (int) (position().X - 0.5*bounds().X);
+		int right = (int) (left + bounds().X);
+		int top = (int) (position().Y - 0.5*bounds().Y);
+		int bottom = (int) (top + bounds().Y);
 		
 		if ( mouseX > left && mouseX < right && mouseY > top && mouseY < bottom )
 		{
@@ -49,13 +50,15 @@ public class DraggableNode extends BaseObject implements Drawable, IMouseListene
 	public void mouseMoved(int mouseX, int mouseY) {
 		if (_dragging)
 		{
-			setPosition(mouseX, mouseY);
+			setPosition(new Vector(mouseX, mouseY));
 		}
 	}
 
 	@Override
 	public void draw() {
-		Configuration.getDisplayModel().drawRectangle((float)(_X - 0.5*_width), (float)(_Y - 0.5*_height), _width, _height);
+		Vector leftCorner = position().subtract( bounds().multiply(0.5f) );
+		
+		Configuration.getDisplayModel().drawRectangle(leftCorner, bounds());
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package graphics;
 
+import math.Vector;
+
 /**
  * An interface for drawing things in a 2D space.
  * @author alex
@@ -14,12 +16,12 @@ public interface IDisplayModel {
 	public void draw();
 	
 	// draws a simple rectangle.
-	public void drawRectangle( float X, float Y, float W, float H);
+	public void drawRectangle( Vector position, Vector bounds);
 	
 	// draws an image at the given position
-	public void drawImage( Object image, float x, float y );
+	public void drawImage( Object image, Vector position );
 	
-	public void drawImage( Object image, float x, float y, float rotation);
+	public void drawImage( Object image, Vector position, float rotation);
 	
-	public void drawLine(float X1, float Y1, float X2, float Y2 );
+	public void drawLine(Vector start, Vector end );
 }

@@ -1,5 +1,6 @@
 package physics;
 
+import math.Vector;
 import input.IMouseListener;
 import core.BaseObject;
 import core.Configuration;
@@ -26,10 +27,10 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 	@Override
 	public void draw() {
 		// draw the rectangle surrounding us.
-		Configuration.getDisplayModel().drawRectangle(100, 100, 200, 200);
+		Configuration.getDisplayModel().drawRectangle(new Vector(100,100), new Vector(200,200));
 		
 		// Draw the rectangle to indicate the P node.
-		Configuration.getDisplayModel().drawRectangle((float)_p.X-3, (float)_p.Y-3, 6, 6);
+		Configuration.getDisplayModel().drawRectangle(_p.subtract(new Vector(3,3)), new Vector(6,6));
 		for ( int x = 0; x < 600; x = x + 5 )
 		{
 			for ( int y = 0; y < 600; y = y+5 )
@@ -37,7 +38,7 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 				if (check(x,y))
 				{
 					// if it is inside the block, draw some shit
-					Configuration.getDisplayModel().drawRectangle(x,y,5,5);
+					Configuration.getDisplayModel().drawRectangle(new Vector(x,y),new Vector(5,5));
 				}
 			}
 		}
@@ -48,7 +49,7 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 		return EDrawingLayer.ground;
 	}
 	
-	private boolean check( double px, double py )
+	private boolean check( float px, float py )
 	{
 		Vector p = new Vector(px, py);
 		int v1 = (int)p.subtract(a).cross(b.subtract(a));

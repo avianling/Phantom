@@ -1,5 +1,6 @@
 package demo;
 
+import math.Vector;
 import core.BaseObject;
 import core.Collidable;
 import core.Dynamic;
@@ -14,9 +15,9 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	public MovementDemo()
 	{
 		super();
-		setPosition(128,128);
-		setBounds(32,32);
-		setSpeed(0,0);
+		setPosition(new Vector(128,128));
+		setBounds(new Vector(32,32));
+		setSpeed(new Vector(0,0));
 		Configuration.getWorldModel().add(this);
 	}
 	
@@ -29,19 +30,19 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	public void KeyPressed(EKey key) {
 		if ( key == EKey.KeyLeft)
 		{
-			setSpeed(-4,dY());
+			setSpeed( speed().add(new Vector(-4,0)) );
 		}
 		if ( key == EKey.KeyRight )
 		{
-			setSpeed(4,dY());
+			setSpeed(speed().add(new Vector(4,0)));
 		}
 		if ( key==EKey.KeyUp )
 		{
-			setSpeed(dX(),-4);
+			setSpeed(speed().add(new Vector(0,-4)));
 		}
 		if ( key==EKey.KeyDown )
 		{
-			setSpeed(dX(),4);
+			setSpeed(speed().add(new Vector(0,4)));
 		}
 	}
 
@@ -49,16 +50,16 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	public void KeyReleased(EKey key) {
 		if ( key==EKey.KeyLeft || key==EKey.KeyRight )
 		{
-			setSpeed(0,dY());
+			setSpeed(speed().multiply(new Vector(0,1)) );
 		}
 		if ( key==EKey.KeyUp || key==EKey.KeyDown )
 		{
-			setSpeed(dX(), 0 );
+			setSpeed( speed().multiply(new Vector(1,0)) );
 		}
 	}
 
 	public void draw() {
-		Configuration.getDisplayModel().drawRectangle(X(), Y(), W(), H());
+		Configuration.getDisplayModel().drawRectangle(position(), bounds());
 	}
 
 	@Override
