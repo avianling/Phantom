@@ -20,6 +20,7 @@ public class Configuration {
 		try {
 			contentManager = new ContentManager("D:\\Phantom\\Media\\");
 			worldModel = new BaseWorld();
+			collisionManager = new BaseCollisionManager();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
 			
@@ -67,6 +68,7 @@ public class Configuration {
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;
 	private static IContentManager contentManager;
+	private static CollisionManager collisionManager;
 	private static String title = "Darwin v0.2";
 	
 	
@@ -108,6 +110,11 @@ public class Configuration {
 	public static IContentManager getContentManager()
 	{
 		return contentManager;
+	}
+	
+	public static CollisionManager getCollisionManager()
+	{
+		return collisionManager;
 	}
 	
 	private static int width, height;

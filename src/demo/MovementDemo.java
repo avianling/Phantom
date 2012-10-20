@@ -1,8 +1,8 @@
 package demo;
 
+import physics.Collidable;
 import math.Vector;
 import core.BaseObject;
-import core.Collidable;
 import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
@@ -65,16 +65,6 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	@Override
 	public void collisionEvent(Collidable other) {
 		//System.out.println("A collision occured!");
-	}
-
-	@Override
-	public boolean collision(Collidable other) {
-		return false;
-	}
-
-	@Override
-	public boolean collision(float x, float y) {
-		return false;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package physics;
 
+import core.Configuration;
 import math.Vector;
 
 public class Polygon implements CollisionBody {
@@ -16,6 +17,8 @@ public class Polygon implements CollisionBody {
 	private double _yrotation;
 	private double _xscale, _yscale;
 	
+	private Collidable _parent;
+	
 	public Polygon( Vector[] pointArray )
 	{
 		size = pointArray.length;
@@ -29,7 +32,6 @@ public class Polygon implements CollisionBody {
 			i++;
 		}
 		
-		System.out.println("We have " + _originalPoints.length + " points");
 		_transformedPoints = new Vector[size];
 		
 		_position = new Vector(0,0);
@@ -37,7 +39,29 @@ public class Polygon implements CollisionBody {
 		_xscale = 1.0;
 		_yscale = 1.0;
 		
+		_parent = null;
+		
 		recalculateTransform();
+		
+		Configuration.getCollisionManager().add(this);
+	}
+	
+	@Override
+	public void setParent(Collidable newParent)
+	{
+		_parent = newParent;
+	}
+	
+	@Override
+	public Collidable getParent()
+	{
+		return _parent;
+	}
+	
+	@Override
+	public void notifyParent(Collidable other)
+	{
+		_parent.collisionEvent(other);
 	}
 	
 	// A method to calculate the transformed state of the polygon.
@@ -53,7 +77,6 @@ public class Polygon implements CollisionBody {
 			
 			_transformedPoints[i] = new Vector(newX, newY);
 			i++;
-			System.out.println("Calculated a point for " + i);
 		}
 	}
 	
@@ -124,20 +147,50 @@ public class Polygon implements CollisionBody {
 		return true;
 	}
 	
+	private boolean doLinesIntersect( Vector startLine1, Vector endLine1, Vector startLine2, Vector endLine2 )
+	{
+		Vector directionLine1 = endLine1.subtract(startLine1);
+		Vector directionLine2 = endLine2.subtract(startLine2);
+		
+		double parameter = ( directionLine1.X*startLine1.Y + directionLine1.Y*startLine2.X-startLine1.X*directionLine1.Y - directionLine1.X*startLine2.Y ) / ( directionLine1.X*directionLine2.Y - directionLine1.Y*directionLine2.X );
+		double parameter2 = ( startLine2.X - startLine1.X + directionLine2.X * parameter ) / directionLine1.X;
+		
+		// calculate the point where the two lines collide.
+		//Vector result = startLine2.add( directionLine2.multiply((float)parameter) );
+		return ( parameter > 0 && parameter < 1.0 && parameter2 > 0 && parameter2 < 1.0 );
+	}
+	
 	@Override
 	public boolean collision(CollisionBody other) {
 		
 		// Phase one:
 		// If any of their points are within our shape, then we are colliding.
+		
 		if ( Polygon.class.isInstance(other) )
 		{
+			Vector l1Start, l2Start, l1End, l2End;
+			
 			Polygon o = (Polygon)other;
-			for ( Vector v : o._transformedPoints )
+			for ( int i=0; i < o.size; i++ )
 			{
-				if ( pointWithin(v) )
+				int endpoint = (i+1)%o.size;
+				
+				l1Start = o._transformedPoints[i];
+				l1End = o._transformedPoints[endpoint];
+				
+				for ( int j=0; j < size; j++ )
 				{
-					return true;
+					int ourEndpoint = (j+1)%size;
+					
+					l2Start = _transformedPoints[j];
+					l2End = _transformedPoints[ourEndpoint];
+					
+					if ( doLinesIntersect(l1Start, l1End, l2Start, l2End) )
+					{
+						return true;
+					}
 				}
+				
 			}
 		}
 		

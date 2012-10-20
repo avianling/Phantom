@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import physics.Collidable;
+
 public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 
 	// a list of all of the things which are drawable in the game world.
@@ -87,7 +89,8 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	
 	public void checkCollisions()
 	{
-		int start = 0;
+		// This is now handled by the collision manager.
+		/*int start = 0;
 		for ( Collidable left : collidableList )
 		{
 			for ( int i=start; i < collidableList.size(); i++ )
@@ -104,14 +107,10 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 				}
 			}
 			start++;
-		}
+		}*/
 	}
 	
 	public void display() {
-		/*for ( Drawable e : drawingList )
-		{
-			e.draw();
-		}*/
 		for ( EDrawingLayer layer : EDrawingLayer.values() )
 		{
 			for ( Drawable d : drawingLayerMap.get(layer))
@@ -133,7 +132,7 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		if ( System.currentTimeMillis() >= nextTick )
 		{
 			// check weather any collisions have happened.
-			checkCollisions();
+			Configuration.getCollisionManager().simulate();
 			//System.out.println("Event Fired!");
 			
 			// run the objects step events.

@@ -2,6 +2,12 @@ package physics;
 
 import math.Vector;
 
+/**
+ * Deprecated class
+ * was used for testing vectors.
+ * @author Alexander
+ *
+ */
 public class CollTest {
 
 	/**

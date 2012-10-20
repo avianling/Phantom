@@ -1,12 +1,14 @@
 package demo;
 
+import physics.Collidable;
+import physics.CollisionBody;
+import physics.Polygon;
 import math.Vector;
 import graphics.AnimatedSprite;
 import graphics.ISprite;
 import input.EKey;
 import input.IKeyListener;
 import core.BaseObject;
-import core.Collidable;
 import core.Configuration;
 import core.Drawable;
 import core.Dynamic;
@@ -17,12 +19,18 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	
 	private boolean canJump;
 	
+	private CollisionBody body;
+	
 	// While this countdown is true we don't collide with walls or solid objects.
 	private int jumpingCountdown;
 	
 	public PlayerDemo()
 	{
 		//super();
+		
+		Vector[] points = { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) };
+		body = new Polygon(points);
+		body.setParent(this);
 		
 		setPosition(new Vector(50,50));
 		setSpeed(new Vector(0,0));
@@ -31,6 +39,15 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 		
 		canJump = false;
 		jumpingCountdown = 0;
+		
+		body.setPosition(new Vector(50,50));
+	}
+	
+	@Override
+	public void setPosition( Vector newPosition)
+	{
+		_position = newPosition;
+		body.setPosition(newPosition);
 	}
 	
 	@Override
@@ -75,7 +92,7 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 		// Move according to out speed.
 		setPosition( position().add(speed()) );
 		//_dY += 0.2;
-		setSpeed( speed().add(new Vector(0,0.2f) ) );
+		setSpeed( speed().add(new Vector(0,0.02f) ) );
 		if ( jumpingCountdown >= 1 )
 		{
 			jumpingCountdown--;
@@ -117,49 +134,6 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 				setPosition( new Vector( position().X, o.position().Y + o.bounds().Y ) );
 			}
 		}
-	}
-
-	@Override
-	public boolean collision(Collidable other) {
-		
-		// A tempory sort of collision checking
-		// assumes all objects are rectangular.
-		if ( BaseObject.class.isInstance(other) )
-		{
-			BaseObject o = (BaseObject)other;
-			
-			double xmin = position().X;
-			double ymin = position().Y;
-			double xmax = position().X + bounds().X;
-			double ymax = position().Y + bounds().Y;
-			
-			double oxmin = o.position().X;
-			double oymin = o.position().Y;
-			double oxmax = o.position().X + o.bounds().X;
-			double oymax = o.position().Y + o.bounds().Y;
-			
-			if ( oxmax < xmin ) { return false; }; // if the other is to the right of us, no collision
-			if ( oxmin > xmax ) { return false; }; // if the other is to the left ....
-			if ( oymax < ymin ) { return false; }; // if the other is above...
-			if ( oymin > ymax ) { return false; }; // if the other is below...
-			
-			return true;
-		}
-		
-		return false;
-	}
-
-	@Override
-	public boolean collision(float x, float y) {
-		/*if ( x > _X && x < ( _X + _width ) && y > _Y && y < ( _Y + _height ) )
-		{
-			return true;
-		}
-		else 
-		{
-			return false;
-		}*/
-		return false;
 	}
 
 	@Override

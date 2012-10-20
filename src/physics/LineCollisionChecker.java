@@ -1,5 +1,6 @@
 package physics;
 
+import graphics.IDisplayModel;
 import math.Vector;
 import core.Configuration;
 import core.Drawable;
@@ -32,24 +33,36 @@ public class LineCollisionChecker implements Drawable {
 
 	@Override
 	public void draw() {
-		Configuration.getDisplayModel().drawLine( A.position(),B.position() );
-		Configuration.getDisplayModel().drawLine(C.position(), D.position() );
-		
-		/*v1.X = B.position().X - A.position().X;
-		v1.Y = B.position().Y - A.position().Y;
-		v2.X = D.position().X - C.position().X;
-		v2.Y = D.position().Y - C.position().Y;*/
+		IDisplayModel graphics = Configuration.getDisplayModel();
+		graphics.drawLine( A.position(),B.position() );
+		graphics.drawLine(C.position(), D.position() );
 		
 		v1 = B.position().subtract(A.position());
 		v2 = D.position().subtract(C.position());
 		
-		float dp = (float) v1.dot(v2);
-		System.out.println(dp);
+		// Calculate the collision point?
+		// TODO: Check if the lines are parallel?
+		
+		Vector position = findLineCollisionPoint(A.position(),B.position(),C.position(),D.position());
+		position = position.subtract(new Vector(3,3) );
+		
+		graphics.drawRectangle(position, new Vector(6,6) );
+	}
+	
+	public Vector findLineCollisionPoint( Vector startLine1, Vector endLine1, Vector startLine2, Vector endLine2 )
+	{
+		Vector directionLine1 = endLine1.subtract(startLine1);
+		Vector directionLine2 = endLine2.subtract(startLine2);
+		
+		double parameter = ( directionLine1.X*startLine1.Y + directionLine1.Y*startLine2.X-startLine1.X*directionLine1.Y - directionLine1.X*startLine2.Y ) / ( directionLine1.X*directionLine2.Y - directionLine1.Y*directionLine2.X );
+		//System.out.println(parameter);
+		// calculate the point where the two lines collide.
+		Vector result = startLine2.add( directionLine2.multiply((float)parameter) );
+		return result;
 	}
 
 	@Override
 	public EDrawingLayer getDepth() {
-		// TODO Auto-generated method stub
 		return EDrawingLayer.ground;
 	}
 }

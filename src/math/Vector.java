@@ -51,4 +51,9 @@ public class Vector {
 		double length = Math.sqrt(X*X + Y*Y);
 		return new Vector( (float)(X/length), (float)(Y/length));
 	}
+	
+	public String toString()
+	{
+		return "" + X + "," + Y;
+	}
 }
