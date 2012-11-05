@@ -23,5 +23,7 @@ public interface IDisplayModel {
 	
 	public void drawImage( Object image, Vector position, float rotation);
 	
+	public void drawImage( Object image, Vector position, Vector scale, float rotation);
+	
 	public void drawLine(Vector start, Vector end );
 }

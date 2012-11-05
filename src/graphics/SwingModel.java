@@ -62,6 +62,16 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 			tx.translate(-img.getWidth()/2, -img.getHeight()/2);
 			g2.drawImage( img, tx, null );
 		}
+		
+		public void drawImage( BufferedImage image, int x, int y, int xscale, int yscale, float rotation )
+		{
+			AffineTransform tx = new AffineTransform();
+			tx.translate(x + image.getWidth()/2, y + image.getHeight()/2);
+			tx.rotate(Math.toRadians(rotation));
+			tx.scale(xscale, yscale);
+			tx.translate(-(image.getWidth()*xscale)/2, -(image.getHeight()*yscale)/2);
+			g2.drawImage(image, tx, null);
+		}
 	}
 	
 	private IEventModel eventModel;
@@ -86,6 +96,11 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	public void drawImage(Object img, Vector position, float rotation )
 	{
 		drawingArea.drawImage( (BufferedImage)img, (int)position.X, (int)position.Y, rotation );
+	}
+	
+	public void drawImage( Object image, Vector position, Vector scale, float rotation)
+	{
+		drawingArea.drawImage( (BufferedImage)image, (int)position.X, (int)position.Y, (int)scale.X, (int)scale.Y, rotation);
 	}
 	
 	public void drawLine( Vector start, Vector end )

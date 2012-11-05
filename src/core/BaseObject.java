@@ -15,6 +15,8 @@ public class BaseObject implements GameObject {
 	public Vector position() { return _position; };
 	public Vector speed() { return _speed; };
 	public Vector bounds() { return _bounds; };
+	public Vector scale() { return _scale; };
+	public float rotation() { return _rotation; };
 	
 	/**
 	 * The x and x coordinates of the object are stored in the protected vector _position<br>
@@ -22,6 +24,10 @@ public class BaseObject implements GameObject {
 	 * These should be set by using the <b>setPosition( Vector newPosition )</b> method.
 	 */
 	protected Vector _position;
+	
+	protected Vector _scale;
+	
+	protected float _rotation;
 	
 	
 	/**
@@ -53,6 +59,16 @@ public class BaseObject implements GameObject {
 	public void setSpeed( Vector newSpeed )
 	{
 		_speed = newSpeed;
+	}
+	
+	public void setScale( Vector newScale )
+	{
+		_scale = newScale;
+	}
+	
+	public void setRotation( float newRotation )
+	{
+		_rotation = newRotation;
 	}
 	
 	/**
