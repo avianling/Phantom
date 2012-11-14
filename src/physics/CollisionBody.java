@@ -10,4 +10,10 @@ public interface CollisionBody {
 	public void setParent(Collidable parent);
 	public Collidable getParent();
 	public void notifyParent(Collidable other);
+	
+	public void setOffset( Vector offset);
+	
+	public void printSmallestPoint();
+	
+	public float getAxisLength( Vector axis );
 }

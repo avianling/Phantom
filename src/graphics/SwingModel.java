@@ -42,6 +42,32 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 			g2.drawRect(x,y,w,h);
 		}
 		
+		public void drawRectangle( int x, int y, int w, int h, float xscale, float yscale, float rotation )
+		{
+			Graphics2D graphics = (Graphics2D) g2.create();
+			AffineTransform tx = new AffineTransform();
+			tx.translate(x + w/2, y + h/2);
+			tx.rotate(Math.toRadians(rotation));
+			tx.translate(-w/2, -h/2);
+			graphics.transform(tx);
+			graphics.drawRect(0, 0, w, h);
+			graphics.dispose();
+
+			//g2.rotate(Math.toRadians(-rotation));
+		}
+		
+		public void drawRectangle( int x, int y, int w, int h, int xoffset, int yoffset, float xscale, float yscale, float rotation )
+		{
+			Graphics2D graphics = (Graphics2D) g2.create();
+			AffineTransform tx = new AffineTransform();
+			tx.translate(x + xoffset, y + yoffset );
+			tx.rotate(Math.toRadians(rotation));
+			tx.translate(-xoffset, -yoffset );
+			graphics.transform(tx);
+			graphics.drawRect(0, 0, w, h);
+			graphics.dispose();
+		}
+		
 		public void drawImage( BufferedImage img, int x, int y )
 		{
 			g2.drawImage(img, x, y, null);
@@ -63,13 +89,21 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 			g2.drawImage( img, tx, null );
 		}
 		
-		public void drawImage( BufferedImage image, int x, int y, int xscale, int yscale, float rotation )
+		public void drawImage( BufferedImage image, int x, int y, int xoffset, int yoffset, int xscale, int yscale, float rotation )
 		{
 			AffineTransform tx = new AffineTransform();
-			tx.translate(x + image.getWidth()/2, y + image.getHeight()/2);
+			
+			/// Code for previous system which assumed that the center of the object was at the center of the image.
+			/*tx.translate(x + image.getWidth()/2, y + image.getHeight()/2);
 			tx.rotate(Math.toRadians(rotation));
 			tx.scale(xscale, yscale);
-			tx.translate(-(image.getWidth()*xscale)/2, -(image.getHeight()*yscale)/2);
+			tx.translate(-(image.getWidth()*xscale)/2, -(image.getHeight()*yscale)/2);*/
+			
+			/// Code for the new system which assumes that the center is at a specified offset.
+			tx.translate(x + xoffset, y + yoffset);
+			tx.rotate(Math.toRadians(rotation));
+			tx.scale(xscale, yscale);
+			tx.translate(-xoffset, -yoffset);
 			g2.drawImage(image, tx, null);
 		}
 	}
@@ -83,6 +117,27 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		drawingArea.drawRectangle((int)position.X, (int)position.Y, (int)bounds.X, (int)bounds.Y);
 	}
 	
+	
+	
+	
+	
+	public void drawRectangle( Vector position, Vector bounds, Vector scale, float rotation )
+	{
+		drawingArea.drawRectangle( (int)position.X, (int)position.Y, (int)bounds.X, (int)bounds.Y, (int)scale.X, (int)scale.Y, rotation );
+	}
+	
+	
+	
+	
+	public void drawRectangle( Vector position, Vector bounds, Vector offset, Vector scale, float rotation )
+	{
+		drawingArea.drawRectangle( (int)position.X, (int)position.Y, (int)bounds.X, (int)bounds.Y, (int)offset.X, (int)offset.Y, (int)scale.X, (int)scale.Y, rotation);
+	}
+	
+	
+	
+	
+	
 	public void drawImage( Object img, Vector position )
 	{
 		if ( BufferedImage.class.isInstance(img) )
@@ -93,15 +148,33 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		}
 	}
 	
+	
+	
+	
+	
 	public void drawImage(Object img, Vector position, float rotation )
 	{
 		drawingArea.drawImage( (BufferedImage)img, (int)position.X, (int)position.Y, rotation );
 	}
 	
+	
+	
+	
+	// Draws the given image at the provided position, scale and rotation.
+	// Assumes that the centre of the object is at the centre of the image.
 	public void drawImage( Object image, Vector position, Vector scale, float rotation)
 	{
-		drawingArea.drawImage( (BufferedImage)image, (int)position.X, (int)position.Y, (int)scale.X, (int)scale.Y, rotation);
+		int halfwidth = ((BufferedImage)image).getWidth()/2;
+		int halfheight = ((BufferedImage)image).getHeight()/2;
+		drawingArea.drawImage( (BufferedImage)image, (int)position.X, (int)position.Y, halfwidth, halfheight, (int)scale.X, (int)scale.Y, rotation);
 	}
+	
+	
+	public void drawImage( Object image, Vector position, Vector offset, Vector scale, float rotation )
+	{
+		drawingArea.drawImage((BufferedImage)image,(int)position.X, (int)position.Y, (int)offset.X, (int)offset.Y, (int)scale.X, (int)scale.Y, rotation);
+	}
+	
 	
 	public void drawLine( Vector start, Vector end )
 	{

@@ -131,15 +131,16 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		// check if we need to make a new calculation.
 		if ( System.currentTimeMillis() >= nextTick )
 		{
-			// check weather any collisions have happened.
-			Configuration.getCollisionManager().simulate();
-			//System.out.println("Event Fired!");
-			
 			// run the objects step events.
 			for ( Dynamic d : dynamicList )
 			{
 				d.step();
 			}
+			
+			// check weather any collisions have happened.
+			Configuration.getCollisionManager().simulate();
+			//System.out.println("Event Fired!");
+			
 			
 			// update the timers.
 			nextTick = System.currentTimeMillis() + millisPerFrame;

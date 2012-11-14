@@ -63,13 +63,13 @@ public class Configuration {
 		}
 	}
 	
-	private static int fps = 60;
+	private static int fps = 240;
 	private static IWorld worldModel;
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;
 	private static IContentManager contentManager;
 	private static CollisionManager collisionManager;
-	private static String title = "Darwin v0.2";
+	private static String title = "Darwin v0.5";
 	
 	
 	public static String getTitle()

@@ -16,7 +16,9 @@ public class BaseObject implements GameObject {
 	public Vector speed() { return _speed; };
 	public Vector bounds() { return _bounds; };
 	public Vector scale() { return _scale; };
+	public Vector offset() { return _offset; };
 	public float rotation() { return _rotation; };
+	public float angularSpeed() { return _angularSpeed; };
 	
 	/**
 	 * The x and x coordinates of the object are stored in the protected vector _position<br>
@@ -29,11 +31,18 @@ public class BaseObject implements GameObject {
 	
 	protected float _rotation;
 	
+	/**
+	 * The offset of an object is where the centre of the object is - rotation and scaling are performed around this point.
+	 */
+	protected Vector _offset;
+	
 	
 	/**
 	 * The speed of the object, expressed as a vector.
 	 */
 	protected Vector _speed;
+	
+	protected float _angularSpeed;
 	
 
 	/**
@@ -61,9 +70,19 @@ public class BaseObject implements GameObject {
 		_speed = newSpeed;
 	}
 	
+	public void setAngularSpeed( float newAngularSpeed )
+	{
+		_angularSpeed = newAngularSpeed;
+	}
+	
 	public void setScale( Vector newScale )
 	{
 		_scale = newScale;
+	}
+	
+	public void setOffset( Vector newOffset )
+	{
+		_offset = newOffset;
 	}
 	
 	public void setRotation( float newRotation )
@@ -98,5 +117,6 @@ public class BaseObject implements GameObject {
 	public void step()
 	{
 		setPosition( position().add(speed()) );
+		setRotation( rotation() + angularSpeed() );
 	}
 }

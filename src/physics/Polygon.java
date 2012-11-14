@@ -17,6 +17,16 @@ public class Polygon implements CollisionBody {
 	private double _yrotation;
 	private double _xscale, _yscale;
 	
+	// An offset - sometimes there is a discrepancy between the object this polygon represents and where the shape this polygon represents is located?
+	// Applied after transformation(?)
+	private Vector _offset;
+	
+	public void setOffset( Vector newOffset )
+	{
+		_offset = newOffset;
+		recalculateTransform();
+	}
+	
 	private Collidable _parent;
 	
 	public Polygon( Vector[] pointArray )
@@ -38,6 +48,7 @@ public class Polygon implements CollisionBody {
 		_yrotation = 0.0;
 		_xscale = 1.0;
 		_yscale = 1.0;
+		_offset = new Vector(0,0);
 		
 		_parent = null;
 		
@@ -53,8 +64,22 @@ public class Polygon implements CollisionBody {
 	}
 	
 	@Override
-	public Collidable getParent()
+	public void printSmallestPoint()
 	{
+		float smallestY = 999999;
+		for ( Vector v : _transformedPoints )
+		{
+			if ( v.Y < smallestY )
+			{
+				smallestY = v.Y;
+			}
+		}
+		System.out.println(smallestY);
+	}
+	
+	@Override
+	public Collidable getParent()
+	{	
 		return _parent;
 	}
 	
@@ -72,8 +97,8 @@ public class Polygon implements CollisionBody {
 		{
 			float newX, newY;
 			
-			newX = (float)(_xscale * v.X * Math.cos(_yrotation) - _xscale * v.Y * Math.sin(_yrotation) + _position.X);
-			newY = (float)(_yscale * v.X * Math.sin(_yrotation) + _yscale * v.Y * Math.cos(_yrotation) + _position.Y);
+			newX = (float)(_xscale * ( v.X - _offset.X ) * Math.cos(_yrotation) - _xscale * ( v.Y - _offset.Y ) * Math.sin(_yrotation) + _position.X + _offset.X);
+			newY = (float)(_yscale * ( v.X - _offset.X ) * Math.sin(_yrotation) + _yscale * ( v.Y - _offset.Y ) * Math.cos(_yrotation) + _position.Y + _offset.Y);
 			
 			_transformedPoints[i] = new Vector(newX, newY);
 			i++;
@@ -122,7 +147,6 @@ public class Polygon implements CollisionBody {
 		{
 			// Make it cyclic.
 			int endPoint = (i+1)%(size);
-			System.out.println(i + "->" + endPoint );
 			Vector start = _transformedPoints[i];
 			Vector end = _transformedPoints[endPoint];
 						
@@ -195,6 +219,36 @@ public class Polygon implements CollisionBody {
 		}
 		
 		return false;
+	}
+
+	
+	/**
+	 * A method to return the length of the shape when it is project along a given axis.
+	 * Only takes unit vectors!
+	 */
+	@Override
+	public float getAxisLength(Vector axis) {	
+		Vector unitAxis = axis.norm();
+		
+		if ( _transformedPoints.length > 2 )
+		{
+			// assign initial values for smallest and longest length
+			float smallest = _transformedPoints[0].dot(unitAxis);
+			float largest = _transformedPoints[1].dot(unitAxis);
+			
+			for ( Vector v : _transformedPoints )
+			{
+				float l = v.dot(unitAxis);
+				if ( l < smallest ) { smallest = l; };
+				if ( l > largest ) { largest = l; };
+			}
+			
+			return (largest - smallest);
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 }
