@@ -45,7 +45,7 @@ public class FollowingNode extends BaseObject implements IMouseListener, Drawabl
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.ground;
 	}
 	

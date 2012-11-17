@@ -37,4 +37,6 @@ public interface ISprite {
 	 * @param rotation The rotation of the sprite. 
 	 */
 	public void draw( Vector position, float rotation);
+	
+	public void draw( Vector position, Vector offset, Vector scale, float rotation );
 }

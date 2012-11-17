@@ -41,8 +41,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			drawingLayerMap.put(layer, list );
 		}
 		
-		drawingLayerMap.get(EDrawingLayer.background);
-		
 		// make this world an event listener.
 		//Configuration.getEventModel().addKeyListener(this);		
 		
@@ -59,7 +57,7 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		{
 			// add to the drawing list.
 			Drawable temp = (Drawable)obj;
-			drawingLayerMap.get(temp.getDepth()).add(temp);
+			drawingLayerMap.get(temp.getLayer()).add(temp);
 		}
 		
 		// if the object is collidable, the put it into the collidable list.

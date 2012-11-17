@@ -61,7 +61,7 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.foreground;
 	}
 

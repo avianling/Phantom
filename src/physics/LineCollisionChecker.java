@@ -41,7 +41,7 @@ public class LineCollisionChecker implements Drawable {
 		v2 = D.position().subtract(C.position());
 		
 		// Calculate the collision point?
-		// TODO: Check if the lines are parallel?
+		// Check if the lines are parallel?
 		
 		Vector position = findLineCollisionPoint(A.position(),B.position(),C.position(),D.position());
 		position = position.subtract(new Vector(3,3) );
@@ -62,7 +62,7 @@ public class LineCollisionChecker implements Drawable {
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.ground;
 	}
 }

@@ -22,7 +22,7 @@ public class MovementDemo extends BaseObject implements Dynamic, Drawable, Colli
 	}
 	
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.ground;
 	}
 	

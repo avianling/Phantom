@@ -33,7 +33,7 @@ public class StaticBlock extends BaseObject implements Collidable, Drawable {
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.background;
 	}
 

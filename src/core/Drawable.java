@@ -14,5 +14,5 @@ public interface Drawable {
 	 */
 	public void draw();
 	
-	public EDrawingLayer getDepth();
+	public EDrawingLayer getLayer();
 }

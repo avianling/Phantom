@@ -11,6 +11,18 @@ import math.Vector;
  */
 public class BaseObject implements GameObject {
 	
+	public BaseObject()
+	{
+		Configuration.getWorldModel().add(this);
+		setPosition(new Vector(0,0));
+		setRotation(0.0f);
+		setScale(new Vector(1,1));
+		setOffset(new Vector(0,0));
+		setSpeed(new Vector(0,0));
+		setAngularSpeed(0.0f);
+		setBounds(new Vector(1,1));
+	}
+	
 	// the getters for the position and widths and so on.
 	public Vector position() { return _position; };
 	public Vector speed() { return _speed; };
@@ -58,6 +70,7 @@ public class BaseObject implements GameObject {
 	public void setPosition( Vector newPosition )
 	{
 		_position = newPosition;
+		positionChanged(newPosition);
 	}
 	
 	/**
@@ -68,37 +81,46 @@ public class BaseObject implements GameObject {
 	public void setSpeed( Vector newSpeed )
 	{
 		_speed = newSpeed;
+		speedChanged(newSpeed);
 	}
 	
 	public void setAngularSpeed( float newAngularSpeed )
 	{
 		_angularSpeed = newAngularSpeed;
+		angularSpeedChanged(newAngularSpeed);
 	}
 	
 	public void setScale( Vector newScale )
 	{
 		_scale = newScale;
+		scaleChanged(newScale);
 	}
 	
 	public void setOffset( Vector newOffset )
 	{
 		_offset = newOffset;
+		offsetChanged(newOffset);
 	}
 	
 	public void setRotation( float newRotation )
 	{
 		_rotation = newRotation;
+		rotationChanged(newRotation);
 	}
 	
-	/**
-	 * A function to set the width and height of this object. Not sure it it'll be used.
-	 * @param w
-	 * @param h
-	 */
-	public void setBounds( Vector newBounds )
-	{
+	public void setBounds( Vector newBounds ) {
 		_bounds = newBounds;
+		boundsChanged(newBounds);
 	}
+	
+	/* These methods are called by the set... methods above. They can be overwritten by child objects. This allows for more customizable behaviour. */
+	protected void positionChanged( Vector newPosition ) {};
+	protected void speedChanged( Vector newSpeed ) {};
+	protected void angularSpeedChanged( float newAngularSpeed ) {};
+	protected void scaleChanged( Vector newScale ) {};
+	protected void offsetChanged( Vector newOffset ) {};
+	protected void rotationChanged( float newRotation ) {};
+	protected void boundsChanged( Vector newBounds ) {};
 	
 	/**
 	 * The default constructor.<br/>

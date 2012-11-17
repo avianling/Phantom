@@ -6,7 +6,7 @@ import math.Vector;
 public class BaseCollidable extends BaseObject implements Collidable, Drawable {
 	
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.ground;
 	}
 	

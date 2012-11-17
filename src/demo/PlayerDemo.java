@@ -184,7 +184,7 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.foreground;
 	}
 

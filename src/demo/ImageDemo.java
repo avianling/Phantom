@@ -26,7 +26,8 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 		setBounds(new Vector(32,32));
 		setSpeed(new Vector(0,0));
 		
-		picture = new AnimatedSprite("test.png",3);
+		picture = //new AnimatedSprite("test.png",3);
+				new StaticSprite("transtest.png");
 		Configuration.getWorldModel().add(this);
 		_rotation = 0;
 		
@@ -50,7 +51,7 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.foreground;
 	}
 	

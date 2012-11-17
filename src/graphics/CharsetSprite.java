@@ -63,5 +63,13 @@ public class CharsetSprite implements ISprite {
 		row = ((int)_frame / _yTile);
 		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , position, rotation);
 	}
+	
+	@Override
+	public void draw(Vector position, Vector offset, Vector scale, float rotation )
+	{
+		column = ((int)_frame % _xTile);
+		row = ((int)_frame / _yTile);
+		Configuration.getDisplayModel().drawImage( _image.getSubimage(column*_frameWidth, row*_frameHeight, _frameWidth, _frameHeight) , position, offset, scale, rotation);
+	}
 
 }

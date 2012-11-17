@@ -62,7 +62,7 @@ public class DraggableNode extends BaseObject implements Drawable, IMouseListene
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.ground;
 	}
 	

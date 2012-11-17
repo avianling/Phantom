@@ -38,6 +38,8 @@ public class ContentManager implements IContentManager {
 				return I;
 			} catch (IOException e) {
 				System.out.println("Error, unable to load the supplied image");
+				e.printStackTrace();
+				System.exit(-1);
 			}
 		}
 		

@@ -3,8 +3,14 @@ import graphics.*;
 import input.IEventModel;
 import input.IMouseListener;
 import input.SwingEventModel;
+import isoGame.BlockTest;
+import isoGame.PlayerOne;
+import isoGame.baseIsoWorld;
+import isoGame.gridDrawer;
 import demo.*;
 import java.lang.reflect.*;
+
+import math.Vector;
 import physics.*;
 
 public class Configuration {
@@ -18,8 +24,8 @@ public class Configuration {
 		height = 480;
 		
 		try {
-			contentManager = new ContentManager("D:\\Phantom\\Media\\");
-			worldModel = new BaseWorld();
+			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
+			worldModel = new baseIsoWorld();
 			collisionManager = new BaseCollisionManager();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
@@ -29,33 +35,27 @@ public class Configuration {
 			e.printStackTrace();
 		}
 		
-		//Drawable thing = new BaseCollidable(128.f, 64.f, 128.f, 64.f);
-		//Drawable thing2 = new BaseCollidable(16,16,32,32);
-		//ImageDemo id = new ImageDemo();
-		//id.setPosition(100, 100);
-		//MovementDemo copy1 = new MovementDemo();
-		//MovementDemo copy2 = new MovementDemo();
-		//MovementDemo copy3 = new MovementDemo();
-		//MovementDemo copy4 = new MovementDemo();
-		
-		//CharsetDemo cd = new CharsetDemo();
-		//cd.setPosition(100,300);
-		
-		//FollowingNode n = new FollowingNode();
 
 
 		//DEMO Stuff
 		
-		PlayerDemo player = new PlayerDemo();
+		/*PlayerDemo player = new PlayerDemo();
 		
 		// Make a block for the player to stand on.
 		StaticBlock floor = new StaticBlock(0,400,640,80);
 		new StaticBlock(400, 300, 240, 20);
 		new StaticBlock(200, 200, 240, 35);
 		
-		LineCollisionChecker test = new LineCollisionChecker();
+		LineCollisionChecker test = new LineCollisionChecker();*/
+		//gridDrawer grid = new gridDrawer();
 		
+		BlockTest upper = new BlockTest( new Vector(128,128));
+		BlockTest lower = new BlockTest( new Vector(160,160));
 		
+		BlockTest lowerright = new BlockTest( new Vector(260,160));
+		BlockTest upperright = new BlockTest( new Vector(228,128));
+		
+		PlayerOne temp = new PlayerOne(new Vector(250, 250));
 		
 		while (true)
 		{
@@ -63,7 +63,7 @@ public class Configuration {
 		}
 	}
 	
-	private static int fps = 240;
+	private static int fps = 45;
 	private static IWorld worldModel;
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;

@@ -49,7 +49,12 @@ public class Vector {
 	public Vector norm()
 	{
 		double length = Math.sqrt(X*X + Y*Y);
-		return new Vector( (float)(X/length), (float)(Y/length));
+		if ( length == 0 )
+		{
+			return new Vector(0,0);
+		} else {
+			return new Vector( (float)(X/length), (float)(Y/length));
+		}
 	}
 	
 	public String toString()

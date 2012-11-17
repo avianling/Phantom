@@ -47,7 +47,7 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 	}
 
 	@Override
-	public EDrawingLayer getDepth() {
+	public EDrawingLayer getLayer() {
 		return EDrawingLayer.background;
 	}
 	
