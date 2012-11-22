@@ -24,16 +24,14 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	// While this countdown is true we don't collide with walls or solid objects.
 	private int jumpingCountdown;
 	
-	public PlayerDemo()
+	public PlayerDemo( Vector initialPosition )
 	{
 		//super();
-		
-		Vector[] points = { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) };
-		body = new Polygon(points);
+		body = new Polygon("PlayerDemo");
 		body.setParent(this);
 		body.setOffset(new Vector(12,16));
 		
-		setPosition(new Vector(50,50));
+		setPosition(initialPosition);
 		setSpeed(new Vector(0,0));
 		setScale( new Vector(1,1) );
 		
@@ -54,14 +52,20 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	public void setPosition( Vector newPosition)
 	{
 		_position = newPosition;
-		body.setPosition(newPosition);
+		if (body != null)
+		{
+			body.setPosition(newPosition);
+		}
 	}
 	
 	@Override
 	public void setRotation( float newRotation )
 	{
 		_rotation = newRotation;
-		body.setRotation( newRotation );
+		if (body != null )
+		{
+			body.setRotation( newRotation );
+		}
 	}
 	
 	@Override
@@ -156,8 +160,6 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 				//setPosition( new Vector( position().X, o.position().Y - body.getAxisLength(new Vector(0,1)) ));
 				
 				// Basically, we want to be on top of the other thing.
-				System.out.println("Height is: " + body.getAxisLength(new Vector(0,1) ) + " position of other is: " + o.position().Y );
-				body.printSmallestPoint();
 				int currentHeight = (int)(0.5*body.getAxisLength( new Vector(0,1) ) + offset().Y);
 				setPosition( new Vector( position().X, o.position().Y - currentHeight ));
 				

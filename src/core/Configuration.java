@@ -3,10 +3,10 @@ import graphics.*;
 import input.IEventModel;
 import input.IMouseListener;
 import input.SwingEventModel;
-import isoGame.BlockTest;
+/*import isoGame.BlockTest;
 import isoGame.PlayerOne;
 import isoGame.baseIsoWorld;
-import isoGame.gridDrawer;
+import isoGame.gridDrawer;*/
 import demo.*;
 import java.lang.reflect.*;
 
@@ -24,8 +24,8 @@ public class Configuration {
 		height = 480;
 		
 		try {
-			contentManager = new ContentManager("C:\\Users\\Alexander\\Documents\\GitHub\\Phantom\\Media\\");
-			worldModel = new baseIsoWorld();
+			contentManager = new ContentManager("C:\\Users\\Alexander.Boorsboom\\Documents\\GitHub\\Phantom\\Media\\");
+			worldModel = new BaseWorld();
 			collisionManager = new BaseCollisionManager();
 			eventModel = new SwingEventModel();
 			displayModel = new SwingModel();
@@ -39,23 +39,30 @@ public class Configuration {
 
 		//DEMO Stuff
 		
-		/*PlayerDemo player = new PlayerDemo();
+		PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
+		
+		for ( int i=55; i < 90; i += 5 )
+		{
+			new PlayerDemo( new Vector( i, 50 ) );
+		}
 		
 		// Make a block for the player to stand on.
 		StaticBlock floor = new StaticBlock(0,400,640,80);
 		new StaticBlock(400, 300, 240, 20);
 		new StaticBlock(200, 200, 240, 35);
 		
-		LineCollisionChecker test = new LineCollisionChecker();*/
+		LineCollisionChecker test = new LineCollisionChecker();
 		//gridDrawer grid = new gridDrawer();
 		
-		BlockTest upper = new BlockTest( new Vector(128,128));
+		/*BlockTest upper = new BlockTest( new Vector(128,128));
 		BlockTest lower = new BlockTest( new Vector(160,160));
 		
 		BlockTest lowerright = new BlockTest( new Vector(260,160));
 		BlockTest upperright = new BlockTest( new Vector(228,128));
 		
-		PlayerOne temp = new PlayerOne(new Vector(250, 250));
+		PlayerOne temp = new PlayerOne(new Vector(250, 250));*/
+		
+		//AssetGenerator.saveAssetFile("PlayerDemo.p", new Vector[] { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) });
 		
 		while (true)
 		{
@@ -71,6 +78,7 @@ public class Configuration {
 	private static CollisionManager collisionManager;
 	private static String title = "Darwin v0.5";
 	
+	private static String mediaDir = "C:\\Users\\Alexander.Boorsboom\\Documents\\GitHub\\Phantom\\Media\\";
 	
 	public static String getTitle()
 	{
@@ -115,6 +123,11 @@ public class Configuration {
 	public static CollisionManager getCollisionManager()
 	{
 		return collisionManager;
+	}
+	
+	public static String getMediaDir()
+	{
+		return mediaDir;
 	}
 	
 	private static int width, height;

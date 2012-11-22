@@ -11,10 +11,13 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 
 	private List<CollisionBody> _collidableList;
 	
+	private AssetManager _assetManager;
+	
 	public BaseCollisionManager()
 	{
 		_collidableList = new ArrayList<CollisionBody>();
 		
+		_assetManager = new BaseAssetManager();
 		Configuration.getWorldModel().add(this);
 	}
 	
@@ -63,6 +66,12 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 	@Override
 	public EDrawingLayer getLayer() {
 		return EDrawingLayer.foreground;
+	}
+	
+	
+	@Override
+	public AssetManager getAssetManager() {
+		return _assetManager;
 	}
 
 }
