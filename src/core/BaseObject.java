@@ -141,4 +141,14 @@ public class BaseObject implements GameObject {
 		setPosition( position().add(speed()) );
 		setRotation( rotation() + angularSpeed() );
 	}
+	
+	@Override
+	/**
+	 * Should delete the object and all references to it and from it so that it can be collected by the garbage collector.
+	 */
+	public void delete()
+	{
+		// goodbye, cruel world!
+		Configuration.getWorldModel().delete(this);
+	}
 }

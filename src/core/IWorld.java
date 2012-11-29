@@ -18,4 +18,8 @@ public interface IWorld {
 
 	public void terminate();
 	
+	public void clear();
+	
+	public void delete( GameObject object );
+	
 }

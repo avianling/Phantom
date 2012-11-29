@@ -87,25 +87,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	
 	public void checkCollisions()
 	{
-		// This is now handled by the collision manager.
-		/*int start = 0;
-		for ( Collidable left : collidableList )
-		{
-			for ( int i=start; i < collidableList.size(); i++ )
-			{
-				Collidable right = collidableList.get(i);
-				// Manual overright to prevent objects colliding with themselves.
-				if ( left != right ) 
-				{
-					if ( left.collision(right) )
-					{
-						left.collisionEvent(right);
-						right.collisionEvent(left);
-					}
-				}
-			}
-			start++;
-		}*/
 	}
 	
 	public void display() {
@@ -189,6 +170,47 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	public void mouseMoved(int mouseX, int mouseY) {
 		_mouseX = mouseX;
 		_mouseY = mouseY;
+	}
+	
+	@Override
+	public void clear()
+	{
+		// TODO: Delete all references to all objects.
+	}
+
+	@Override
+	/**
+	 * Remove all references to the provided object.
+	 * Currently not thread safe.
+	 */
+	public void delete(GameObject object) {
+		// TODO Auto-generated method stub
+		if ( Drawable.class.isInstance(object) )
+		{
+			Drawable d = (Drawable)object;
+			EDrawingLayer layer = d.getLayer();
+			drawingLayerMap.get(layer).remove(d);
+		}
+		
+		
+		// if the object is dynamic, add the object to the dynamic list.
+		if ( Dynamic.class.isInstance(object) )
+		{
+			dynamicList.remove((Dynamic)object);
+		}
+		
+		// if the object is able to receive key input, add it to the event listeners observers list.
+		if ( IKeyListener.class.isInstance(object) )
+		{
+			Configuration.getEventModel().removeKeyListener((IKeyListener)object);
+		}
+		
+		// if the object is listening for mouse input, register it as a mouse listener.
+		if ( IMouseListener.class.isInstance(object) )
+		{
+			Configuration.getEventModel().removeMouseListener((IMouseListener)object);
+		}
+		
 	}
 
 }
