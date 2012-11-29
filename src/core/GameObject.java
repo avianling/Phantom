@@ -26,4 +26,17 @@ public interface GameObject {
 	public void setRotation( float newRotation );
 	
 	public void setAngularSpeed( float newAngularSpeed );
+	
+	/**
+	 * This method should prepare the object for deletion.
+	 * i.e. clear any and all references to the object, including those in the world.
+	 * Should also clear any outgoing references.
+	 * This is a required method - failure to provide it will result in undesired game behaviour.
+	 */
+	public void delete();
+	
+	/**
+	 * An event which is called when the object is deleted.
+	 */
+	public void onDelete();
 }

@@ -5,11 +5,10 @@ import math.Vector;
 
 public class Polygon implements CollisionBody {
 
-	// Our origonal coordinates.
-	// Should not be modified!
-	private Vector _originalPoints[];
+	private PolygonAsset asset;
 	
 	protected Vector _transformedPoints[];
+	private Vector _origonalPoints[];
 	
 	private int size;
 	
@@ -33,14 +32,31 @@ public class Polygon implements CollisionBody {
 	{
 		size = pointArray.length;
 		
-		_originalPoints = new Vector[size];
+		//asset = new PolygonAsset(pointArray);
+		//_origonalPoints = asset.getPoints();
 		
-		int i=0;
-		for ( Vector v : pointArray )
-		{
-			_originalPoints[i] = new Vector( v.X, v.Y);
-			i++;
-		}
+		_origonalPoints = pointArray;
+		_transformedPoints = new Vector[size];
+		
+		_position = new Vector(0,0);
+		_yrotation = 0.0;
+		_xscale = 1.0;
+		_yscale = 1.0;
+		_offset = new Vector(0,0);
+		
+		_parent = null;
+		
+		recalculateTransform();
+		
+		Configuration.getCollisionManager().add(this);
+	}
+	
+	public Polygon( String physicsAssetName )
+	{
+		
+		asset = (PolygonAsset)Configuration.getCollisionManager().getAssetManager().loadAsset(physicsAssetName);
+		_origonalPoints = asset.getPoints();
+		size = _origonalPoints.length;
 		
 		_transformedPoints = new Vector[size];
 		
@@ -66,7 +82,7 @@ public class Polygon implements CollisionBody {
 	@Override
 	public void printSmallestPoint()
 	{
-		float smallestY = 999999;
+		float smallestY = 999999999;
 		for ( Vector v : _transformedPoints )
 		{
 			if ( v.Y < smallestY )
@@ -93,7 +109,7 @@ public class Polygon implements CollisionBody {
 	private void recalculateTransform()
 	{
 		int i=0;
-		for ( Vector v : _originalPoints )
+		for ( Vector v : _origonalPoints )
 		{
 			float newX, newY;
 			
