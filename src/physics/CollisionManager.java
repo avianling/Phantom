@@ -10,5 +10,7 @@ public interface CollisionManager {
 	
 	public void add(CollisionBody object);
 	
+	public void remove(CollisionBody object);
+	
 	public AssetManager getAssetManager();
 }

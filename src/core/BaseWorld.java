@@ -199,6 +199,11 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			dynamicList.remove((Dynamic)object);
 		}
 		
+		if ( Collidable.class.isInstance(object) )
+		{
+			collidableList.remove((Collidable)object);
+		}
+		
 		// if the object is able to receive key input, add it to the event listeners observers list.
 		if ( IKeyListener.class.isInstance(object) )
 		{

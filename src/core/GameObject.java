@@ -34,4 +34,9 @@ public interface GameObject {
 	 * This is a required method - failure to provide it will result in undesired game behaviour.
 	 */
 	public void delete();
+	
+	/**
+	 * An event which is called when the object is deleted.
+	 */
+	public void onDelete();
 }

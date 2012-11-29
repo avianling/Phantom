@@ -122,19 +122,6 @@ public class BaseObject implements GameObject {
 	protected void rotationChanged( float newRotation ) {};
 	protected void boundsChanged( Vector newBounds ) {};
 	
-	/**
-	 * The default constructor.<br/>
-	 * This is mainly used to specify default values for things.
-	 */
-	/*public void RealObject()
-	{
-		setPosition(0,0);
-		setBounds(32,32);
-		
-		// add ourselves to the world class.
-		Configuration.getWorldModel().add(this);
-	}*/
-	
 	
 	public void step()
 	{
@@ -146,9 +133,19 @@ public class BaseObject implements GameObject {
 	/**
 	 * Should delete the object and all references to it and from it so that it can be collected by the garbage collector.
 	 */
-	public void delete()
+	public final void delete()
 	{
 		// goodbye, cruel world!
 		Configuration.getWorldModel().delete(this);
+		
+		// call the ondelete event
+		onDelete();
+	}
+	
+	// this is an object specific delete action. Should be overwritten in child objects.
+	@Override
+	public void onDelete()
+	{
+		
 	}
 }

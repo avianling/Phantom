@@ -74,4 +74,9 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 		return _assetManager;
 	}
 
+	@Override
+	public void remove(CollisionBody object) {
+		_collidableList.remove(object);
+	}
+
 }
