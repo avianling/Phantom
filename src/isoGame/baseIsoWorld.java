@@ -15,6 +15,7 @@ import core.Configuration;
 import core.Drawable;
 import core.Dynamic;
 import core.EDrawingLayer;
+import core.GameObject;
 
 import physics.Collidable;
 
@@ -255,6 +256,18 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 		float yi = (float)((real.Y * 0.8660254) / (real.X ));
 		float xi = (real.Y / (2*tileSize) ) - yi;
 		return new Vector(xi,yi);
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(GameObject object) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

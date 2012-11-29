@@ -3,6 +3,8 @@ import graphics.*;
 import input.IEventModel;
 import input.IMouseListener;
 import input.SwingEventModel;
+import isoGame.BlockTest;
+import isoGame.PlayerOne;
 /*import isoGame.BlockTest;
 import isoGame.PlayerOne;
 import isoGame.baseIsoWorld;
@@ -54,13 +56,13 @@ public class Configuration {
 		LineCollisionChecker test = new LineCollisionChecker();
 		//gridDrawer grid = new gridDrawer();
 		
-		/*BlockTest upper = new BlockTest( new Vector(128,128));
+		BlockTest upper = new BlockTest( new Vector(128,128));
 		BlockTest lower = new BlockTest( new Vector(160,160));
 		
 		BlockTest lowerright = new BlockTest( new Vector(260,160));
 		BlockTest upperright = new BlockTest( new Vector(228,128));
 		
-		PlayerOne temp = new PlayerOne(new Vector(250, 250));*/
+		PlayerOne temp = new PlayerOne(new Vector(250, 250));
 		
 		//AssetGenerator.saveAssetFile("PlayerDemo.p", new Vector[] { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) });
 		
