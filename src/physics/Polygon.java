@@ -1,6 +1,7 @@
 package physics;
 
 import core.Configuration;
+import exceptions.AssetException;
 import math.Vector;
 
 public class Polygon implements CollisionBody {
@@ -51,7 +52,7 @@ public class Polygon implements CollisionBody {
 		Configuration.getCollisionManager().add(this);
 	}
 	
-	public Polygon( String physicsAssetName )
+	public Polygon( String physicsAssetName ) throws AssetException
 	{
 		
 		asset = (PolygonAsset)Configuration.getCollisionManager().getAssetManager().loadAsset(physicsAssetName);

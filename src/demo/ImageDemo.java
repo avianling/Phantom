@@ -7,6 +7,8 @@ import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
+import exceptions.AssetException;
+import exceptions.ObjectCreationException;
 import graphics.AnimatedSprite;
 import graphics.ISprite;
 import graphics.StaticSprite;
@@ -19,15 +21,18 @@ public class ImageDemo extends BaseObject implements Drawable, Collidable, Dynam
 	
 	private float _rotation;
 	
-	public ImageDemo()
+	public ImageDemo() throws ObjectCreationException
 	{
 		super();
 		setPosition(new Vector(128,128));
 		setBounds(new Vector(32,32));
 		setSpeed(new Vector(0,0));
 		
-		picture = //new AnimatedSprite("test.png",3);
-				new StaticSprite("transtest.png");
+		try {
+			picture = new StaticSprite("transtest.png");
+		} catch (AssetException e) {
+			throw new ObjectCreationException("Couldn't load asset", e );
+		}
 		Configuration.getWorldModel().add(this);
 		_rotation = 0;
 		

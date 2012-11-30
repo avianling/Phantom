@@ -5,6 +5,7 @@ import java.awt.Image;
 import math.Vector;
 
 import core.Configuration;
+import exceptions.AssetException;
 
 public class AnimatedSprite implements ISprite {
 
@@ -15,7 +16,7 @@ public class AnimatedSprite implements ISprite {
 	
 	private Image _frames[];
 	
-	public AnimatedSprite( String name, int frames )
+	public AnimatedSprite( String name, int frames ) throws AssetException
 	{
 		_animStart = 0;
 		_animEnd = frames;

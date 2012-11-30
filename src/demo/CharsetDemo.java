@@ -7,6 +7,8 @@ import core.Dynamic;
 import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
+import exceptions.AssetException;
+import exceptions.ObjectCreationException;
 import graphics.AnimatedSprite;
 import graphics.CharsetSprite;
 import graphics.ISprite;
@@ -18,7 +20,7 @@ public class CharsetDemo extends BaseObject implements Drawable, Collidable, Dyn
 
 	private ISprite picture;
 	
-	public CharsetDemo()
+	public CharsetDemo() throws AssetException
 	{
 		super();
 		setPosition(new Vector(128,128));

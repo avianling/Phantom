@@ -4,6 +4,8 @@ import math.Vector;
 import core.Configuration;
 import core.Dynamic;
 import core.EDrawingLayer;
+import exceptions.AssetException;
+import exceptions.ObjectCreationException;
 import graphics.ISprite;
 import graphics.StaticSprite;
 import input.IMouseListener;
@@ -15,7 +17,7 @@ public class PlayerOne extends baseIsoDrawable implements IMouseListener, Dynami
 	
 	private ISprite cross;
 	
-	public PlayerOne(Vector position)
+	public PlayerOne(Vector position) throws ObjectCreationException
 	{
 		super();
 		
@@ -24,7 +26,13 @@ public class PlayerOne extends baseIsoDrawable implements IMouseListener, Dynami
 		setPosition(position);
 		target = new Vector(position.X, position.Y);
 		
-		cross = new StaticSprite("cross.png");
+		try {
+			cross = new StaticSprite("cross.png");
+		} catch ( AssetException e )
+		{
+			throw new ObjectCreationException( "Unable to load asset", e );
+		}
+		
 	}
 	
 	@Override

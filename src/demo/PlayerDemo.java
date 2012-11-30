@@ -14,6 +14,8 @@ import core.Drawable;
 import core.Dynamic;
 import core.EDrawingLayer;
 import core.GameObject;
+import exceptions.AssetException;
+import exceptions.ObjectCreationException;
 
 public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collidable, IKeyListener {
 	
@@ -24,10 +26,15 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	// While this countdown is true we don't collide with walls or solid objects.
 	private int jumpingCountdown;
 	
-	public PlayerDemo( Vector initialPosition )
+	public PlayerDemo( Vector initialPosition ) throws ObjectCreationException
 	{
 		//super();
-		body = new Polygon("PlayerDemo");
+		try {
+			body = new Polygon("PlayerDemo");
+		} catch ( AssetException e )
+		{
+			throw new ObjectCreationException("Unable to build physics asset", e );
+		}
 		body.setParent(this);
 		body.setOffset(new Vector(12,16));
 		

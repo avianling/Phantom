@@ -1,12 +1,15 @@
 package physics;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
 
 import math.Vector;
 
 import core.Configuration;
+import exceptions.AssetException;
 
 public class BaseAssetManager implements AssetManager {
 
@@ -21,7 +24,7 @@ public class BaseAssetManager implements AssetManager {
 	}
 	
 	@Override
-	public PhysicsAsset loadAsset(String assetName) {
+	public PhysicsAsset loadAsset(String assetName) throws AssetException {
 		if ( assetStore.containsKey(assetName) )
 		{
 			System.out.println("Serving an asset from the store.");
@@ -36,12 +39,16 @@ public class BaseAssetManager implements AssetManager {
 				
 				PolygonAsset asset = new PolygonAsset( (Vector[])o );
 				assetStore.put(assetName, asset);
-				return asset;
+				return asset; 
 			}
-			catch ( Exception e )
+			catch ( FileNotFoundException e )
 			{
-				e.printStackTrace();
-				return null;
+				throw new AssetException("Unable to find asset file");
+			} catch (ClassNotFoundException e) {
+				throw new AssetException("Invalid asset file");
+			} catch (IOException e )
+			{
+				throw new AssetException("Unable to find asset file");
 			}
 		}
 	}

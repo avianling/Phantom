@@ -10,6 +10,9 @@ import isoGame.PlayerOne;
 import isoGame.baseIsoWorld;
 import isoGame.gridDrawer;*/
 import demo.*;
+import exceptions.AssetException;
+import exceptions.ObjectCreationException;
+
 import java.lang.reflect.*;
 
 import math.Vector;
@@ -40,29 +43,33 @@ public class Configuration {
 
 
 		//DEMO Stuff
+		try {
+			PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
 		
-		PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
-		
-		for ( int i=55; i < 90; i += 5 )
+			/*for ( int i=55; i < 90; i += 5 )
+			{
+				new PlayerDemo( new Vector( i, 50 ) );
+			}*/
+			
+			// Make a block for the player to stand on.
+			StaticBlock floor = new StaticBlock(0,400,640,80);
+			new StaticBlock(400, 300, 240, 20);
+			new StaticBlock(200, 200, 240, 35);
+			
+			LineCollisionChecker test = new LineCollisionChecker();
+			//gridDrawer grid = new gridDrawer();
+			
+			BlockTest upper = new BlockTest( new Vector(128,128));
+			BlockTest lower = new BlockTest( new Vector(160,160));
+			
+			BlockTest lowerright = new BlockTest( new Vector(260,160));
+			BlockTest upperright = new BlockTest( new Vector(228,128));
+			
+			PlayerOne temp = new PlayerOne(new Vector(250, 250));
+		} catch ( ObjectCreationException e )
 		{
-			new PlayerDemo( new Vector( i, 50 ) );
+			System.out.println(e.getMessage());
 		}
-		
-		// Make a block for the player to stand on.
-		StaticBlock floor = new StaticBlock(0,400,640,80);
-		new StaticBlock(400, 300, 240, 20);
-		new StaticBlock(200, 200, 240, 35);
-		
-		LineCollisionChecker test = new LineCollisionChecker();
-		//gridDrawer grid = new gridDrawer();
-		
-		BlockTest upper = new BlockTest( new Vector(128,128));
-		BlockTest lower = new BlockTest( new Vector(160,160));
-		
-		BlockTest lowerright = new BlockTest( new Vector(260,160));
-		BlockTest upperright = new BlockTest( new Vector(228,128));
-		
-		PlayerOne temp = new PlayerOne(new Vector(250, 250));
 		
 		//AssetGenerator.saveAssetFile("PlayerDemo.p", new Vector[] { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) });
 		

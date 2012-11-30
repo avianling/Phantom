@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import math.Vector;
 
 import core.Configuration;
+import exceptions.AssetException;
 
 public class CharsetSprite implements ISprite {
 
@@ -26,7 +27,7 @@ public class CharsetSprite implements ISprite {
 	
 	private BufferedImage _image;
 	
-	public CharsetSprite( String imageName, int frameWidth, int frameHeight)
+	public CharsetSprite( String imageName, int frameWidth, int frameHeight) throws AssetException
 	{
 		_image = (BufferedImage) Configuration.getContentManager().loadImage(imageName);
 		
