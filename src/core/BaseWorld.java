@@ -42,7 +42,7 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		}
 		
 		// make this world an event listener.
-		//Configuration.getEventModel().addKeyListener(this);		
+		//Configuration.getEventModel().addKeyListener(this);	
 		
 		millisPerFrame = 1000 / Configuration.getFPS();
 		nextTick = System.currentTimeMillis()+millisPerFrame;
@@ -175,7 +175,33 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	@Override
 	public void clear()
 	{
-		// TODO: Delete all references to all objects.
+		for ( EDrawingLayer l : EDrawingLayer.values() )
+		{
+			List<Drawable> list = drawingLayerMap.get(l);
+			
+			while ( list.size() != 0 )
+			{
+				((GameObject)list.get(0)).delete();
+			}
+		}
+		
+		while ( dynamicList.size() != 0 )
+		{
+			if ( GameObject.class.isInstance(dynamicList.get(0)))
+			{
+				GameObject obj = (GameObject)dynamicList.get(0);
+				obj.delete();
+			}
+		}
+		
+		while ( collidableList.size() != 0 )
+		{
+			if ( GameObject.class.isInstance(collidableList.get(0)))
+			{
+				GameObject obj = (GameObject)collidableList.get(0);
+				obj.delete();
+			}
+		}
 	}
 
 	@Override
@@ -184,7 +210,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	 * Currently not thread safe.
 	 */
 	public void delete(GameObject object) {
-		// TODO Auto-generated method stub
 		if ( Drawable.class.isInstance(object) )
 		{
 			Drawable d = (Drawable)object;
@@ -216,6 +241,12 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			Configuration.getEventModel().removeMouseListener((IMouseListener)object);
 		}
 		
+	}
+
+	@Override
+	public void save(String worldName) {
+		// Save the world to a given filename.
+		// for every object we can find, record their name and position, rotation etc.
 	}
 
 }

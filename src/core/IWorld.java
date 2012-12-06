@@ -22,4 +22,6 @@ public interface IWorld {
 	
 	public void delete( GameObject object );
 	
+	public void save( String worldName );
+	
 }

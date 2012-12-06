@@ -270,4 +270,10 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 		
 	}
 
+	@Override
+	public void save(String worldName) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
