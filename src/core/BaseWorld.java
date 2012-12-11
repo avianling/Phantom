@@ -4,6 +4,9 @@ import input.EKey;
 import input.IKeyListener;
 import input.IMouseListener;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -243,10 +246,121 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		
 	}
 
+	/**
+	 * Save the current state of the world file into a JSON style text file.
+	 * e.g.
+	 *  {
+	 * 		objectName : { fieldName : fieldValue, vectorExample : { X : 32, Y : 23 } },
+	 * 		other object : {}
+	 *  }
+	 *  
+	 *  currently, this does not allow the saving of reference types. Will probably have an object naming system where each object gets
+	 *  a unique name which can be used to get a reference to that object. 
+	 *  
+	 *  <h4> Warning: </h4>
+	 *  <p> Currently, only objects which extend BaseObject will be saved. </p>
+	 */
 	@Override
 	public void save(String worldName) {
 		// Save the world to a given filename.
 		// for every object we can find, record their name and position, rotation etc.
+		
+		try {
+			FileWriter w = new FileWriter(worldName + ".world");
+
+			BufferedWriter out = new BufferedWriter(w);
+			
+			// make everything dirty:
+			for ( EDrawingLayer l : EDrawingLayer.values() )
+			{
+				List<Drawable> list = drawingLayerMap.get(l);
+				
+				for ( Drawable d : list )
+				{
+					if ( d instanceof BaseObject )
+					{
+						((BaseObject)d).clean=false;
+					}
+				}
+			}
+			
+			for ( Dynamic d : dynamicList )
+			{
+				if ( d instanceof BaseObject )
+				{
+					((BaseObject)d).clean=false;
+				}
+			}
+			
+			for ( Collidable d : collidableList )
+			{
+				if ( d instanceof BaseObject )
+				{
+					((BaseObject)d).clean=false;
+				}
+			}
+			
+			// now, for every object which is not already clean, we save it and make it clean.
+			
+			w.write("{\n");
+			
+			boolean first = true;
+			
+			for ( EDrawingLayer l : EDrawingLayer.values() )
+			{
+				List<Drawable> list = drawingLayerMap.get(l);
+				
+				for ( Drawable d : list )
+				{
+					// write the objects information to the record. 
+					if ( d instanceof BaseObject )
+					{
+						BaseObject b = (BaseObject)d;
+						
+						if ( !b.clean )
+						{
+							b.clean = true;
+							if ( first )
+							{
+								first = false;
+							} else {
+								out.write(",\n ");
+							}
+							out.write(b.getClass().getSimpleName() + " : {}");
+						}
+					}
+				}
+			}
+			
+			for ( Dynamic d : dynamicList )
+			{
+				// write the objects information to the record. 
+				if ( d instanceof BaseObject )
+				{
+					BaseObject b = (BaseObject)d;
+					
+					if ( !b.clean )
+					{
+						b.clean = true;
+						if ( first )
+						{
+							first = false;
+						} else {
+							out.write(",\n ");
+						}
+						out.write(b.getClass().getSimpleName() + " : {}");
+				}
+				}
+			}
+			
+			
+			
+			w.write("\n}");
+			w.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

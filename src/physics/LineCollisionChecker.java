@@ -2,12 +2,13 @@ package physics;
 
 import graphics.IDisplayModel;
 import math.Vector;
+import core.BaseObject;
 import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
 import demo.DraggableNode;
 
-public class LineCollisionChecker implements Drawable {
+public class LineCollisionChecker extends BaseObject implements Drawable {
 	
 	private DraggableNode A,B,C,D;
 	

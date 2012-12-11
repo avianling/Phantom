@@ -43,11 +43,14 @@ public class BaseAssetManager implements AssetManager {
 			}
 			catch ( FileNotFoundException e )
 			{
+				e.printStackTrace();
 				throw new AssetException("Unable to find asset file");
 			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 				throw new AssetException("Invalid asset file");
 			} catch (IOException e )
 			{
+				e.printStackTrace();
 				throw new AssetException("Unable to find asset file");
 			}
 		}

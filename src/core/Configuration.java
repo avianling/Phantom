@@ -29,7 +29,7 @@ public class Configuration {
 		height = 480;
 		
 		try {
-			contentManager = new ContentManager("C:\\Users\\Alexander.Boorsboom\\Documents\\GitHub\\Phantom\\Media\\");
+			contentManager = new ContentManager();
 			worldModel = new BaseWorld();
 			collisionManager = new BaseCollisionManager();
 			eventModel = new SwingEventModel();
@@ -66,6 +66,8 @@ public class Configuration {
 			BlockTest upperright = new BlockTest( new Vector(228,128));
 			
 			PlayerOne temp = new PlayerOne(new Vector(250, 250));
+			
+			worldModel.save("testSave");
 		} catch ( ObjectCreationException e )
 		{
 			System.out.println(e.getMessage());
@@ -87,7 +89,7 @@ public class Configuration {
 	private static CollisionManager collisionManager;
 	private static String title = "Darwin v0.5";
 	
-	private static String mediaDir = "C:\\Users\\Alexander.Boorsboom\\Documents\\GitHub\\Phantom\\Media\\";
+	private static String mediaDir = "Media\\";
 	
 	public static String getTitle()
 	{

@@ -9,18 +9,20 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import core.Configuration;
+
 public class ContentManager implements IContentManager {
 
 	private Map<String, Image> content;
 	
 	private String _rootDir;
 	
-	public ContentManager( String rootDir )
+	public ContentManager( )
 	{
 		// create the content map.
 		content = new HashMap<String, Image>();
 		
-		_rootDir = rootDir;
+		_rootDir = Configuration.getMediaDir();
 	}
 	
 	@Override

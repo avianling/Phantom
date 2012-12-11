@@ -15,7 +15,7 @@ public class PlayerOne extends baseIsoDrawable implements IMouseListener, Dynami
 
 	private Vector target;
 	
-	private ISprite cross;
+	//private ISprite cross;
 	
 	public PlayerOne(Vector position) throws ObjectCreationException
 	{
@@ -26,12 +26,12 @@ public class PlayerOne extends baseIsoDrawable implements IMouseListener, Dynami
 		setPosition(position);
 		target = new Vector(position.X, position.Y);
 		
-		try {
+		/*try {
 			cross = new StaticSprite("cross.png");
 		} catch ( AssetException e )
 		{
 			throw new ObjectCreationException( "Unable to load asset", e );
-		}
+		}*/
 		
 	}
 	

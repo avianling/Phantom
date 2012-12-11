@@ -21,6 +21,7 @@ public class BaseObject implements GameObject {
 		setSpeed(new Vector(0,0));
 		setAngularSpeed(0.0f);
 		setBounds(new Vector(1,1));
+		clean = false;
 	}
 	
 	// the getters for the position and widths and so on.
@@ -148,4 +149,10 @@ public class BaseObject implements GameObject {
 	{
 		
 	}
+	
+	/**
+	 * This is a clean bit.
+	 * Avoid touching it.
+	 */
+	public boolean clean;
 }
