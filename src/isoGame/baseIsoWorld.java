@@ -18,13 +18,11 @@ import core.EDrawingLayer;
 import core.GameObject;
 
 import physics.Collidable;
+import physics.CollisionManager;
 
 public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 
 	// a list of all of the things which are drawable in the game world.
-	//private ArrayList<Drawable> drawingList;
-	//private DrawableTreeNode drawableTreeRoot;
-	private ArrayList<Collidable> collidableList;
 	private ArrayList<Dynamic> dynamicList;
 	
 	// A map relating each drawing layer key to a seperate list of drawings.
@@ -38,6 +36,18 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 	// A list mapping each tile on the game board to the object occupying that board.
 	private HashMap<Vector, isoBase > tileMap;
 	
+	private CollisionManager collisionManager;
+	
+	public void setCollisionManager( CollisionManager collisionManager )
+	{
+		this.collisionManager = collisionManager;
+	}
+	
+	public CollisionManager getCollisionManager()
+	{
+		return collisionManager;
+	}
+	
 	// the time at which the last frame was calculated.
 	private long nextTick;
 	private int millisPerFrame;
@@ -46,9 +56,6 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 	
 	public baseIsoWorld()
 	{
-		//drawingList = new ArrayList<Drawable>();
-		//drawableTreeRoot = new DrawableTreeNode();
-		collidableList = new ArrayList<Collidable>();
 		dynamicList = new ArrayList<Dynamic>();
 		
 		tileMap = new HashMap<Vector, isoBase>();
@@ -61,10 +68,10 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 		for ( EDrawingLayer layer : EDrawingLayer.values() )
 		{
 			System.out.println("Creating the list of drawable objects");
-			ArrayList list = new ArrayList< Drawable >();
+			ArrayList<Drawable> list = new ArrayList< Drawable >();
 			drawingLayerMap.put(layer, list );
 			
-			ArrayList isoList = new ArrayList< isoDrawable>();
+			ArrayList<isoDrawable> isoList = new ArrayList< isoDrawable>();
 			isoDrawingLayerMap.put(layer, isoList);
 		}
 		
@@ -112,12 +119,6 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 				Drawable temp = (Drawable)obj;
 				drawingLayerMap.get(temp.getLayer()).add(temp);
 			}
-		}
-		
-		// if the object is collidable, the put it into the collidable list.
-		if ( Collidable.class.isInstance(obj) )
-		{
-			collidableList.add((Collidable)obj);
 		}
 		
 		// if the object is dynamic, add the object to the dynamic list.
@@ -175,7 +176,7 @@ public class baseIsoWorld implements isoWorld, IKeyListener, IMouseListener {
 			}
 			
 			// check weather any collisions have happened.
-			Configuration.getCollisionManager().simulate();
+			collisionManager.simulate();
 			//System.out.println("Event Fired!");
 			
 			

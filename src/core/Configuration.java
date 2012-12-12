@@ -17,6 +17,7 @@ import java.lang.reflect.*;
 
 import math.Vector;
 import physics.*;
+import textViewer.TextDisplayModel;
 
 public class Configuration {
 
@@ -31,9 +32,13 @@ public class Configuration {
 		try {
 			contentManager = new ContentManager();
 			worldModel = new BaseWorld();
-			collisionManager = new BaseCollisionManager();
-			eventModel = new SwingEventModel();
-			displayModel = new SwingModel();
+			assetManager = new BaseAssetManager();
+			worldModel.setCollisionManager(new BaseCollisionManager());
+			eventModel = new TextDisplayModel();
+			displayModel = (IDisplayModel) eventModel;
+			
+			//eventModel = new SwingEventModel();
+			//displayModel = new SwingModel();
 			
 			worldModel.initalize();
 		} catch (Exception e) {
@@ -56,7 +61,7 @@ public class Configuration {
 			new StaticBlock(400, 300, 240, 20);
 			new StaticBlock(200, 200, 240, 35);
 			
-			LineCollisionChecker test = new LineCollisionChecker();
+			//LineCollisionChecker test = new LineCollisionChecker();
 			//gridDrawer grid = new gridDrawer();
 			
 			BlockTest upper = new BlockTest( new Vector(128,128));
@@ -66,6 +71,8 @@ public class Configuration {
 			BlockTest upperright = new BlockTest( new Vector(228,128));
 			
 			PlayerOne temp = new PlayerOne(new Vector(250, 250));
+			
+			
 			
 			worldModel.save("testSave");
 		} catch ( ObjectCreationException e )
@@ -86,6 +93,7 @@ public class Configuration {
 	private static IDisplayModel displayModel;
 	private static IEventModel eventModel;
 	private static IContentManager contentManager;
+	private static AssetManager assetManager;
 	private static CollisionManager collisionManager;
 	private static String title = "Darwin v0.5";
 	
@@ -139,6 +147,11 @@ public class Configuration {
 	public static String getMediaDir()
 	{
 		return mediaDir;
+	}
+	
+	public static AssetManager getAssetManager()
+	{
+		return assetManager;
 	}
 	
 	private static int width, height;

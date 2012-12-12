@@ -1,6 +1,7 @@
 package core;
 
 import math.Vector;
+import meta.Persistent;
 
 /**
  * base Object is the superclass for things which have a real tangible game presence.
@@ -38,23 +39,29 @@ public class BaseObject implements GameObject {
 	 * Coordinates relate to the position of the top left hand corner of the object, rather than the center<br/>
 	 * These should be set by using the <b>setPosition( Vector newPosition )</b> method.
 	 */
+	@Persistent
 	protected Vector _position;
 	
+	@Persistent
 	protected Vector _scale;
 	
+	@Persistent
 	protected float _rotation;
 	
 	/**
 	 * The offset of an object is where the centre of the object is - rotation and scaling are performed around this point.
 	 */
+	@Persistent
 	protected Vector _offset;
 	
 	
 	/**
 	 * The speed of the object, expressed as a vector.
 	 */
+	@Persistent
 	protected Vector _speed;
 	
+	@Persistent
 	protected float _angularSpeed;
 	
 

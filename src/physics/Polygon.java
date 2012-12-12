@@ -49,13 +49,13 @@ public class Polygon implements CollisionBody {
 		
 		recalculateTransform();
 		
-		Configuration.getCollisionManager().add(this);
+		Configuration.getWorldModel().getCollisionManager().add(this);
 	}
 	
 	public Polygon( String physicsAssetName ) throws AssetException
 	{
 		
-		asset = (PolygonAsset)Configuration.getCollisionManager().getAssetManager().loadAsset(physicsAssetName);
+		asset = (PolygonAsset)Configuration.getAssetManager().loadAsset(physicsAssetName);
 		_origonalPoints = asset.getPoints();
 		size = _origonalPoints.length;
 		
@@ -71,7 +71,7 @@ public class Polygon implements CollisionBody {
 		
 		recalculateTransform();
 		
-		Configuration.getCollisionManager().add(this);
+		Configuration.getWorldModel().getCollisionManager().add(this);
 	}
 	
 	@Override

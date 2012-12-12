@@ -7,22 +7,39 @@ import input.IMouseListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import physics.Collidable;
+import physics.CollisionManager;
 
 public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 
 	// a list of all of the things which are drawable in the game world.
 	//private ArrayList<Drawable> drawingList;
 	//private DrawableTreeNode drawableTreeRoot;
-	private ArrayList<Collidable> collidableList;
 	private ArrayList<Dynamic> dynamicList;
 	
 	// A map relating each drawing layer key to a seperate list of drawings.
 	private HashMap<EDrawingLayer, List<Drawable> > drawingLayerMap;
+	
+	/**
+	 * The collision manager used for managing collisions in this world.
+	 */
+	private CollisionManager collisionManager;
+	
+	
+	public void setCollisionManager( CollisionManager collisionManager )
+	{
+		this.collisionManager = collisionManager;
+	}
+	
+	public CollisionManager getCollisionManager()
+	{
+		return collisionManager;
+	}
 	
 	// the time at which the last frame was calculated.
 	private long nextTick;
@@ -30,9 +47,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 	
 	public BaseWorld()
 	{
-		//drawingList = new ArrayList<Drawable>();
-		//drawableTreeRoot = new DrawableTreeNode();
-		collidableList = new ArrayList<Collidable>();
 		dynamicList = new ArrayList<Dynamic>();
 		
 		drawingLayerMap = new HashMap<EDrawingLayer, List<Drawable> >();
@@ -40,7 +54,7 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		for ( EDrawingLayer layer : EDrawingLayer.values() )
 		{
 			System.out.println("Creating the list of drawable objects");
-			ArrayList list = new ArrayList< Drawable >();
+			ArrayList<Drawable> list = new ArrayList< Drawable >();
 			drawingLayerMap.put(layer, list );
 		}
 		
@@ -63,12 +77,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			drawingLayerMap.get(temp.getLayer()).add(temp);
 		}
 		
-		// if the object is collidable, the put it into the collidable list.
-		if ( Collidable.class.isInstance(obj) )
-		{
-			collidableList.add((Collidable)obj);
-		}
-		
 		// if the object is dynamic, add the object to the dynamic list.
 		if ( Dynamic.class.isInstance(obj) )
 		{
@@ -88,8 +96,18 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		}
 	}
 	
+	/**
+	 * checkCollisions
+	 * <br/>
+	 * If we have a valid collision manager, check to see if any collisions have occured.
+	 * Collision managers will automatically notify objects of collisions via callbacks.
+	 */
 	public void checkCollisions()
 	{
+		if ( collisionManager != null )
+		{
+			collisionManager.simulate();
+		}
 	}
 	
 	public void display() {
@@ -102,12 +120,13 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		}
 	}
 	
-	@Override
+	
 	/**
 	 * void : simulate
 	 * Simulate is the function which causes the game world to advance one tick.
 	 * This should also make things draw themselves by firing the draw event in the displayModel.
 	 */
+	@Override
 	public void simulate()
 	{
 		// check if we need to make a new calculation.
@@ -120,7 +139,7 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			}
 			
 			// check weather any collisions have happened.
-			Configuration.getCollisionManager().simulate();
+			checkCollisions();
 			//System.out.println("Event Fired!");
 			
 			
@@ -175,13 +194,18 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		_mouseY = mouseY;
 	}
 	
+	/**
+	 * <h4>Clear</h4>
+	 * Delete all the objects in the world by calling the delete method on each object.
+	 * <br/>
+	 * If you wish to add events which are fired when an object is deleted, please see the onDelete method of the BaseObject class.
+	 */
 	@Override
 	public void clear()
 	{
 		for ( EDrawingLayer l : EDrawingLayer.values() )
 		{
 			List<Drawable> list = drawingLayerMap.get(l);
-			
 			while ( list.size() != 0 )
 			{
 				((GameObject)list.get(0)).delete();
@@ -193,15 +217,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			if ( GameObject.class.isInstance(dynamicList.get(0)))
 			{
 				GameObject obj = (GameObject)dynamicList.get(0);
-				obj.delete();
-			}
-		}
-		
-		while ( collidableList.size() != 0 )
-		{
-			if ( GameObject.class.isInstance(collidableList.get(0)))
-			{
-				GameObject obj = (GameObject)collidableList.get(0);
 				obj.delete();
 			}
 		}
@@ -225,11 +240,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		if ( Dynamic.class.isInstance(object) )
 		{
 			dynamicList.remove((Dynamic)object);
-		}
-		
-		if ( Collidable.class.isInstance(object) )
-		{
-			collidableList.remove((Collidable)object);
 		}
 		
 		// if the object is able to receive key input, add it to the event listeners observers list.
@@ -292,17 +302,9 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 				}
 			}
 			
-			for ( Collidable d : collidableList )
-			{
-				if ( d instanceof BaseObject )
-				{
-					((BaseObject)d).clean=false;
-				}
-			}
-			
 			// now, for every object which is not already clean, we save it and make it clean.
 			
-			w.write("{\n");
+			w.write("{\n\t");
 			
 			boolean first = true;
 			
@@ -317,17 +319,20 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 					{
 						BaseObject b = (BaseObject)d;
 						
-						if ( !b.clean )
+						if ( true )
 						{
 							b.clean = true;
 							if ( first )
 							{
 								first = false;
 							} else {
-								out.write(",\n ");
+								w.write(",\n\t");
 							}
-							out.write(b.getClass().getSimpleName() + " : {}");
+							
+							
 						}
+					} else {
+						System.out.println("found something which isn't a base object");
 					}
 				}
 			}
@@ -346,9 +351,9 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 						{
 							first = false;
 						} else {
-							out.write(",\n ");
+							w.write(",\n\t");
 						}
-						out.write(b.getClass().getSimpleName() + " : {}");
+						w.write(b.getClass().getSimpleName() + " : {}");
 				}
 				}
 			}

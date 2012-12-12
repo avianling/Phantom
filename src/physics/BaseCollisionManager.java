@@ -17,8 +17,8 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 	{
 		_collidableList = new ArrayList<CollisionBody>();
 		
-		_assetManager = new BaseAssetManager();
-		Configuration.getWorldModel().add(this);
+		_assetManager = Configuration.getAssetManager();
+		//Configuration.getWorldModel().add(this);
 	}
 	
 	@Override
