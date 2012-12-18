@@ -9,15 +9,18 @@ import graphics.ISprite;
 import input.EKey;
 import input.IKeyListener;
 import core.BaseObject;
+import core.BaseObjectSavable;
 import core.Configuration;
 import core.Drawable;
 import core.Dynamic;
 import core.EDrawingLayer;
 import core.GameObject;
+import core.Serializer;
 import exceptions.AssetException;
 import exceptions.ObjectCreationException;
+import exceptions.SerializerNotLoadedException;
 
-public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collidable, IKeyListener {
+public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, Collidable, IKeyListener {
 	
 	private boolean canJump, onTheGround;
 	
@@ -195,6 +198,14 @@ public class PlayerDemo extends BaseObject implements Dynamic, Drawable, Collida
 	@Override
 	public EDrawingLayer getLayer() {
 		return EDrawingLayer.foreground;
+	}
+	
+	/** 
+	 * The save method
+	 */
+	@Override
+	public void save(Serializer writer) throws SerializerNotLoadedException {
+		super.save(writer);
 	}
 
 }

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import exceptions.SerializerNotLoadedException;
+
 import physics.Collidable;
 import physics.CollisionManager;
 
@@ -276,10 +278,6 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 		// for every object we can find, record their name and position, rotation etc.
 		
 		try {
-			FileWriter w = new FileWriter(worldName + ".world");
-
-			BufferedWriter out = new BufferedWriter(w);
-			
 			// make everything dirty:
 			for ( EDrawingLayer l : EDrawingLayer.values() )
 			{
@@ -303,8 +301,8 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 			}
 			
 			// now, for every object which is not already clean, we save it and make it clean.
-			
-			w.write("{\n\t");
+			Serializer saver = new FileSerializer();
+			saver.startSession(worldName);
 			
 			boolean first = true;
 			
@@ -319,20 +317,17 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 					{
 						BaseObject b = (BaseObject)d;
 						
-						if ( true )
+						if ( b.clean == false )
 						{
 							b.clean = true;
-							if ( first )
+							if ( d instanceof Savable )
 							{
-								first = false;
-							} else {
-								w.write(",\n\t");
+								Savable s = (Savable)b;
+								saver.startObject( d.getClass().getName() );
+								s.save(saver);
+								saver.endObject();
 							}
-							
-							
 						}
-					} else {
-						System.out.println("found something which isn't a base object");
 					}
 				}
 			}
@@ -344,26 +339,24 @@ public class BaseWorld implements IWorld, IKeyListener, IMouseListener {
 				{
 					BaseObject b = (BaseObject)d;
 					
-					if ( !b.clean )
+					if ( b.clean == false )
 					{
 						b.clean = true;
-						if ( first )
+						if ( d instanceof Savable )
 						{
-							first = false;
-						} else {
-							w.write(",\n\t");
+							Savable s = (Savable)b;
+							saver.startObject( d.getClass().getName() );
+							s.save(saver);
+							saver.endObject();
 						}
-						w.write(b.getClass().getSimpleName() + " : {}");
-				}
+					}
 				}
 			}
 			
+			saver.endSession();
 			
 			
-			w.write("\n}");
-			w.close();
-			
-		} catch (IOException e) {
+		} catch (IOException | SerializerNotLoadedException e) {
 			e.printStackTrace();
 		}
 	}

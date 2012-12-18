@@ -5,12 +5,15 @@ import physics.CollisionBody;
 import physics.Polygon;
 import math.Vector;
 import core.BaseObject;
+import core.BaseObjectSavable;
 import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
 import core.GameObject;
+import core.Serializer;
+import exceptions.SerializerNotLoadedException;
 
-public class StaticBlock extends BaseObject implements Collidable, Drawable {
+public class StaticBlock extends BaseObjectSavable implements Collidable, Drawable {
 
 	private CollisionBody body;
 	
@@ -42,6 +45,17 @@ public class StaticBlock extends BaseObject implements Collidable, Drawable {
 		//System.out.println("something stood on me");
 		
 		// do nothing
+	}
+	
+	/**
+	 * The save method.
+	 * For this static block object, only the position, height and width and rotation are important. Nothing else.
+	 */
+	@Override
+	public void save(Serializer writer) throws SerializerNotLoadedException {
+		super.save(writer);
+		writer.save("width", bounds().X );
+		writer.save("height", bounds().Y );
 	}
 	
 }

@@ -2,15 +2,9 @@ package math;
 
 import java.io.Serializable;
 
-import core.Saveable;
-
-import meta.Persistent;
-
 public class Vector implements Serializable {
-	@Persistent
 	public float X;
 	
-	@Persistent
 	public float Y;
 	
 	public Vector( float x, float y )

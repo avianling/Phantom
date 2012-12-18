@@ -12,7 +12,9 @@ import isoGame.gridDrawer;*/
 import demo.*;
 import exceptions.AssetException;
 import exceptions.ObjectCreationException;
+import exceptions.SerializerNotLoadedException;
 
+import java.io.IOException;
 import java.lang.reflect.*;
 
 import math.Vector;
@@ -71,8 +73,6 @@ public class Configuration {
 			BlockTest upperright = new BlockTest( new Vector(228,128));
 			
 			PlayerOne temp = new PlayerOne(new Vector(250, 250));
-			
-			
 			
 			worldModel.save("testSave");
 		} catch ( ObjectCreationException e )
