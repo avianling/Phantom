@@ -3,6 +3,8 @@
  */
 package core;
 
+import core.saving.Savable;
+import core.saving.Serializer;
 import exceptions.SerializerNotLoadedException;
 
 /**

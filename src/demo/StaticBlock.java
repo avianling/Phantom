@@ -10,7 +10,7 @@ import core.Configuration;
 import core.Drawable;
 import core.EDrawingLayer;
 import core.GameObject;
-import core.Serializer;
+import core.saving.Serializer;
 import exceptions.SerializerNotLoadedException;
 
 public class StaticBlock extends BaseObjectSavable implements Collidable, Drawable {

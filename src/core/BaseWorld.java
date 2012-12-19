@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import core.saving.FileSerializer;
+import core.saving.Savable;
+import core.saving.Serializer;
+
 import exceptions.SerializerNotLoadedException;
 
 import physics.Collidable;

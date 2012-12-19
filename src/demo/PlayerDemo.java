@@ -15,7 +15,7 @@ import core.Drawable;
 import core.Dynamic;
 import core.EDrawingLayer;
 import core.GameObject;
-import core.Serializer;
+import core.saving.Serializer;
 import exceptions.AssetException;
 import exceptions.ObjectCreationException;
 import exceptions.SerializerNotLoadedException;
