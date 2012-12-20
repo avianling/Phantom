@@ -15,8 +15,8 @@ import java.util.List;
 import core.saving.FileSerializer;
 import core.saving.Savable;
 import core.saving.Serializer;
+import core.saving.SerializerNotLoadedException;
 
-import exceptions.SerializerNotLoadedException;
 
 import physics.Collidable;
 import physics.CollisionManager;

@@ -1,4 +1,4 @@
-package exceptions;
+package core.saving;
 
 public class SerializerNotLoadedException extends Exception {
 	public SerializerNotLoadedException(String message)

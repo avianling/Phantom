@@ -18,5 +18,18 @@ public interface SaveData {
 	 */
 	public int getInt( String attributeName ) throws InvalidAttributeException;
 	
+	/**
+	 * Find the given attribute and return it as a floating point value
+	 * @param attributeName The name of the attribute. Passed as a string. If this attribute does not exist an InvalidAttributeException is thrown.
+	 * @return The value of the attribute as a float.
+	 * @throws InvalidAttributeException If there is no attribute saved under the given name.
+	 */
+	public float getFloat( String attributeName ) throws InvalidAttributeException;
+	
+	/**
+	 * Stores the provided value under the given attribute name so that it can be retrieved later.
+	 * @param attributeName
+	 * @param value
+	 */
 	public void set( String attributeName, String value );
 }

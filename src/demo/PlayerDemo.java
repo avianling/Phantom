@@ -15,10 +15,12 @@ import core.Drawable;
 import core.Dynamic;
 import core.EDrawingLayer;
 import core.GameObject;
+import core.saving.InvalidDataException;
+import core.saving.SaveData;
 import core.saving.Serializer;
+import core.saving.SerializerNotLoadedException;
 import exceptions.AssetException;
 import exceptions.ObjectCreationException;
-import exceptions.SerializerNotLoadedException;
 
 public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, Collidable, IKeyListener {
 	
@@ -28,6 +30,30 @@ public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, 
 	
 	// While this countdown is true we don't collide with walls or solid objects.
 	private int jumpingCountdown;
+	
+	public PlayerDemo() throws ObjectCreationException
+	{
+		super();
+		try {
+			body = new Polygon("PlayerDemo");
+		} catch ( AssetException e )
+		{
+			throw new ObjectCreationException("Unable to build physics asset", e );
+		}
+		body.setParent(this);
+		body.setOffset(new Vector(12,16));
+		
+		setOffset( new Vector(12,16) );
+		
+		setBounds(new Vector(24,32));
+		Configuration.getWorldModel().add(this);
+		
+		canJump = false;
+		onTheGround = false;
+		jumpingCountdown = 0;
+		
+		body.setPosition(new Vector(50,50));
+	}
 	
 	public PlayerDemo( Vector initialPosition ) throws ObjectCreationException
 	{
@@ -206,6 +232,12 @@ public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, 
 	@Override
 	public void save(Serializer writer) throws SerializerNotLoadedException {
 		super.save(writer);
+	}
+	
+	@Override
+	public void load( SaveData data ) throws InvalidDataException
+	{
+		super.load(data);
 	}
 
 }

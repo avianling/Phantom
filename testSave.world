@@ -1,28 +1,28 @@
 {
-	demo.StaticBlock : {
-		posX :0.0
-		posY :400.0
-		rotation :0.0
-		width :640.0
-		height :80.0
+	demo.StaticBlock:{
+		posX:0.0
+		posY:400.0
+		rotation:0.0
+		width:640.0
+		height:80.0
 	}
-	demo.StaticBlock : {
-		posX :400.0
-		posY :300.0
-		rotation :0.0
-		width :240.0
-		height :20.0
+	demo.StaticBlock:{
+		posX:400.0
+		posY:300.0
+		rotation:0.0
+		width:240.0
+		height:20.0
 	}
-	demo.StaticBlock : {
-		posX :200.0
-		posY :200.0
-		rotation :0.0
-		width :240.0
-		height :35.0
+	demo.StaticBlock:{
+		posX:200.0
+		posY:200.0
+		rotation:0.0
+		width:240.0
+		height:35.0
 	}
-	demo.PlayerDemo : {
-		posX :50.0
-		posY :50.0
-		rotation :0.0
+	demo.PlayerDemo:{
+		posX:50.0
+		posY:50.0
+		rotation:0.0
 	}
 }

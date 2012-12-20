@@ -1,6 +1,5 @@
 package core.saving;
 
-import exceptions.SerializerNotLoadedException;
 
 /**
  * Objects which extend this interface can be saved by using the Serializer helper class.
@@ -16,7 +15,9 @@ public interface Savable {
 	public void save( Serializer writer ) throws SerializerNotLoadedException;
 	
 	/**
-	 * 
+	 * Load the object from a given block of save data.
+	 * @param data
+	 * @throws InvalidDataException 
 	 */
-	//public void load
+	public void load( SaveData data ) throws InvalidDataException;
 }

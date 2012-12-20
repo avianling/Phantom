@@ -12,10 +12,14 @@ import isoGame.gridDrawer;*/
 import demo.*;
 import exceptions.AssetException;
 import exceptions.ObjectCreationException;
-import exceptions.SerializerNotLoadedException;
 
 import java.io.IOException;
 import java.lang.reflect.*;
+
+import core.saving.FileDeserializer;
+import core.saving.InvalidSaveException;
+import core.saving.NoSuchSaveException;
+import core.saving.SerializerNotLoadedException;
 
 import math.Vector;
 import physics.*;
@@ -36,11 +40,11 @@ public class Configuration {
 			worldModel = new BaseWorld();
 			assetManager = new BaseAssetManager();
 			worldModel.setCollisionManager(new BaseCollisionManager());
-			eventModel = new TextDisplayModel();
-			displayModel = (IDisplayModel) eventModel;
+			//eventModel = new TextDisplayModel();
+			//displayModel = (IDisplayModel) eventModel;
 			
-			//eventModel = new SwingEventModel();
-			//displayModel = new SwingModel();
+			eventModel = new SwingEventModel();
+			displayModel = new SwingModel();
 			
 			worldModel.initalize();
 		} catch (Exception e) {
@@ -51,7 +55,7 @@ public class Configuration {
 
 		//DEMO Stuff
 		try {
-			PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
+			//PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
 		
 			/*for ( int i=55; i < 90; i += 5 )
 			{
@@ -59,25 +63,33 @@ public class Configuration {
 			}*/
 			
 			// Make a block for the player to stand on.
-			StaticBlock floor = new StaticBlock(0,400,640,80);
-			new StaticBlock(400, 300, 240, 20);
-			new StaticBlock(200, 200, 240, 35);
+			//StaticBlock floor = new StaticBlock(0,400,640,80);
+			//new StaticBlock(400, 300, 240, 20);
+			//new StaticBlock(200, 200, 240, 35);
 			
 			//LineCollisionChecker test = new LineCollisionChecker();
 			//gridDrawer grid = new gridDrawer();
 			
-			BlockTest upper = new BlockTest( new Vector(128,128));
-			BlockTest lower = new BlockTest( new Vector(160,160));
+			//BlockTest upper = new BlockTest( new Vector(128,128));
+			//BlockTest lower = new BlockTest( new Vector(160,160));
 			
-			BlockTest lowerright = new BlockTest( new Vector(260,160));
-			BlockTest upperright = new BlockTest( new Vector(228,128));
+			//BlockTest lowerright = new BlockTest( new Vector(260,160));
+			//BlockTest upperright = new BlockTest( new Vector(228,128));
 			
-			PlayerOne temp = new PlayerOne(new Vector(250, 250));
+			//PlayerOne temp = new PlayerOne(new Vector(250, 250));
 			
-			worldModel.save("testSave");
-		} catch ( ObjectCreationException e )
+			//worldModel.save("testSave");
+			FileDeserializer s = new FileDeserializer();
+			s.load("testSave");
+		}/* catch ( ObjectCreationException e )
 		{
 			System.out.println(e.getMessage());
+		}*/ catch (NoSuchSaveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidSaveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		//AssetGenerator.saveAssetFile("PlayerDemo.p", new Vector[] { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) });

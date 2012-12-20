@@ -3,7 +3,6 @@ package core.saving;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import exceptions.SerializerNotLoadedException;
 
 /**
  * This is a helper class to aid the user in storing object state.

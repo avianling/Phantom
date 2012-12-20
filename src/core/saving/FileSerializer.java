@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-import exceptions.SerializerNotLoadedException;
 
 public class FileSerializer implements Serializer {
 	
@@ -40,7 +39,7 @@ public class FileSerializer implements Serializer {
 		if ( output!=null )
 		{
 			try {
-				output.write("\t\t" + name + " :" + value + ",\n");
+				output.write("\t\t" + name + ":" + value + ",\n");
 			} catch (IOException e) {
 				throw new SerializerNotLoadedException( "Unable to write to file!", e );
 			}
@@ -54,7 +53,7 @@ public class FileSerializer implements Serializer {
 		if ( output!=null )
 		{
 			try {
-				output.write("\t\t" + name + " :" + value + "\n");
+				output.write("\t\t" + name + ":" + value + "\n");
 			} catch (IOException e) {
 				throw new SerializerNotLoadedException( "Unable to write to file!", e );
 			}
@@ -68,7 +67,7 @@ public class FileSerializer implements Serializer {
 		if ( output!=null )
 		{
 			try {
-				output.write("\t" + name + " : {\n");
+				output.write("\t" + name + ":{\n");
 			} catch (IOException e) {
 				throw new SerializerNotLoadedException( "Unable to write to file!", e );
 			}
