@@ -75,7 +75,7 @@ public class StaticBlock extends BaseObjectSavable implements Collidable, Drawab
 			float h = data.getFloat("height");
 			float x = position().X;
 			float y = position().Y;
-			setBounds( new Vector(w,h ) );
+			setBounds( new Vector(w,h) );
 			
 			Vector[] points = {new Vector(x,y), new Vector(x+w,y), new Vector(x+w, y+h), new Vector(x, y+h) };
 			

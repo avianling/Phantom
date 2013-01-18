@@ -32,4 +32,7 @@ public interface IDisplayModel {
 	public void drawImage( Object image, Vector position, Vector offset, Vector scale, float rotation );
 	
 	public void drawLine(Vector start, Vector end );
+	
+	// Text related features?
+	public void drawText( String text, Vector position, int size );
 }

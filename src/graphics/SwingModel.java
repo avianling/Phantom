@@ -106,6 +106,19 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 			tx.translate(-xoffset, -yoffset);
 			g2.drawImage(image, tx, null);
 		}
+		
+		public void drawText( String text, int x, int y, int size )
+		{
+			//TODO: improve font loading method.
+			// font loading could be optimized?
+			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+			
+			Font font = new Font("Arial", Font.PLAIN, size);
+			
+			g2.setFont(font);
+			g2.drawString(text, x, y);
+		}
 	}
 	
 	private IEventModel eventModel;
@@ -211,6 +224,14 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	
 		show();
 	}
+	
+	
+	@Override
+	public void drawText( String text, Vector position, int size )
+	{
+		drawingArea.drawText(text, (int)position.X, (int)position.Y, size );
+	}
+	
 	
 	@Override
 	public Object loadImage( String imageName )

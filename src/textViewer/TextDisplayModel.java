@@ -70,4 +70,9 @@ public class TextDisplayModel extends BaseEventModel implements IDisplayModel {
 
 	}
 
+	@Override
+	public void drawText(String text, Vector position, int size) {
+		System.out.println("Drawing Text: " + text + " at " + position);
+	}
+
 }
