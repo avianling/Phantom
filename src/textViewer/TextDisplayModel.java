@@ -3,9 +3,17 @@ package textViewer;
 import input.BaseEventModel;
 import math.Vector;
 import graphics.IDisplayModel;
+import graphics.View;
 
 public class TextDisplayModel extends BaseEventModel implements IDisplayModel {
-
+	private View _view;
+	
+	@Override
+	public void setActiveView( View view )
+	{
+		_view = view;
+	}
+	
 	@Override
 	public void initalize() {
 		// TODO Auto-generated method stub

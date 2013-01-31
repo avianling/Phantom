@@ -35,4 +35,10 @@ public interface IDisplayModel {
 	
 	// Text related features?
 	public void drawText( String text, Vector position, int size );
+	
+	/**
+	 * Change which view is the active view. 
+	 * @param view the view to use.
+	 */
+	public void setActiveView( View view );
 }
