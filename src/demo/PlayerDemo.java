@@ -2,8 +2,9 @@ package demo;
 
 import physics.Collidable;
 import physics.CollisionBody;
-import physics.Polygon;
 import math.Vector;
+import geometry.Polygon;
+import geometry.ShapeFactory;
 import graphics.AnimatedSprite;
 import graphics.ISprite;
 import input.EKey;
@@ -35,10 +36,12 @@ public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, 
 	{
 		super();
 		try {
-			body = new Polygon("PlayerDemo");
+			body = ShapeFactory.get().getPolygonFromAsset("PlayerDemo");
 		} catch ( AssetException e )
 		{
 			throw new ObjectCreationException("Unable to build physics asset", e );
+		} catch (Exception e) {
+			throw new ObjectCreationException("No shapefactory has been defined. Please define a shape factory!", e );
 		}
 		body.setParent(this);
 		body.setOffset(new Vector(12,16));
@@ -59,10 +62,12 @@ public class PlayerDemo extends BaseObjectSavable implements Dynamic, Drawable, 
 	{
 		//super();
 		try {
-			body = new Polygon("PlayerDemo");
+			body = ShapeFactory.get().getPolygonFromAsset("PlayerDemo");
 		} catch ( AssetException e )
 		{
 			throw new ObjectCreationException("Unable to build physics asset", e );
+		} catch (Exception e) {
+			throw new ObjectCreationException("No shapefactory has been defined. Please define a shape factory!", e );
 		}
 		body.setParent(this);
 		body.setOffset(new Vector(12,16));

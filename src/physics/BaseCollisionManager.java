@@ -1,5 +1,7 @@
 package physics;
 
+import geometry.Polygon;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 
 	@Override
 	public void draw() {
-		for ( CollisionBody b : _collidableList )
+		/*for ( CollisionBody b : _collidableList )
 		{
 			if ( Polygon.class.isInstance(b) )
 			{
@@ -60,7 +62,7 @@ public class BaseCollisionManager implements CollisionManager, Drawable {
 					Configuration.getDisplayModel().drawLine(p._transformedPoints[i], p._transformedPoints[endpoint]);
 				}
 			}
-		}
+		}*/
 	}
 
 	@Override

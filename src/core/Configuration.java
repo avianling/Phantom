@@ -1,4 +1,5 @@
 package core;
+import geometry.ShapeFactory;
 import graphics.*;
 import input.IEventModel;
 import input.IMouseListener;
@@ -38,7 +39,7 @@ public class Configuration {
 		try {
 			contentManager = new ContentManager();
 			worldModel = new BaseWorld();
-			assetManager = new BaseAssetManager();
+			assetManager = new BaseAssetManager(mediaDir);
 			worldModel.setCollisionManager(new BaseCollisionManager());
 			//eventModel = new TextDisplayModel();
 			//displayModel = (IDisplayModel) eventModel;

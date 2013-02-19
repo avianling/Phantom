@@ -88,6 +88,26 @@ public class PolygonTest {
 		}	
 	}
 	
+	@Test
+	public void AxisLengthTest()
+	{
+		Vector topLeft = new Vector(0,0);
+		Vector topRight = new Vector( 15, 0 );
+		Vector bottomLeft = new Vector( 0, 15 );
+		Vector bottomRight = new Vector( 15, 15 );
+		
+		Vector[] shape = { topLeft, topRight, bottomLeft, bottomRight };
+		
+		Polygon m = new Polygon(shape);
+		
+		assertEquals(m.getAxisLength(new Vector(0,1) ), 15, 0);
+		assertEquals( m.getAxisLength(new Vector(1,0)), 15, 0);
+		
+		m.setRotation(45);
+		
+		assertEquals(m.getAxisLength(new Vector(0,1)), 10.606f , 0.001 );
+	}
+	
 	
 
 }
