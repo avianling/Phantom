@@ -125,12 +125,21 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	
 	private myPanel drawingArea;
 	
-	private View currentView;
+	
+	private View _view;
+	
+	public void setActiveView( View Newview )
+	{
+		_view = Newview;
+	}
+	
 	
 	public void drawRectangle( Vector position, Vector bounds )
 	{
-		drawingArea.drawRectangle((int)position.X, (int)position.Y, (int)bounds.X, (int)bounds.Y);
+		Vector Pos = position.subtract(_view.getPosition());
+		drawingArea.drawRectangle((int)Pos.X, (int)Pos.Y, (int)bounds.X, (int)bounds.Y);
 	}
+	// TODO: Need to update the others?
 	
 	
 	
@@ -199,10 +208,8 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 	{
 		setTitle(Configuration.getTitle());
 		setSize(Configuration.getWidth(), Configuration.getHeight());
+		setActiveView( new View( new Vector(0,0), new Vector( Configuration.getWidth(), Configuration.getHeight() ) ) );
 		setLocation(0,0);
-		
-		currentView = new View();
-		currentView.setBounds( new Vector( Configuration.getWidth(), Configuration.getHeight() ) );
 		
 		// store the key event listener
 		
@@ -225,6 +232,8 @@ public class SwingModel extends JFrame implements IDisplayModel, IContentManager
 		drawingArea.setBackground(Color.white);
 		drawingArea.setSize(Configuration.getWidth(),Configuration.getHeight());
 		content.add(drawingArea);
+		
+		
 	
 		show();
 	}

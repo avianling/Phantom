@@ -2,7 +2,6 @@ package demo;
 
 import physics.Collidable;
 import physics.CollisionBody;
-import physics.Polygon;
 import math.Vector;
 import core.BaseObject;
 import core.BaseObjectSavable;
@@ -15,6 +14,7 @@ import core.saving.SaveData;
 import core.saving.Serializer;
 import core.saving.SerializerNotLoadedException;
 import exceptions.InvalidAttributeException;
+import geometry.Polygon;
 
 public class StaticBlock extends BaseObjectSavable implements Collidable, Drawable {
 

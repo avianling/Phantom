@@ -3,32 +3,61 @@ package graphics;
 import math.Vector;
 
 /**
- * IView
- * @author Alexander
+ * A View is a portion of the game world which is visible.
+ * @author alexander.boorsboom
  *
  */
 public class View {
+	private Vector _position;
+	private Vector _size;
 	
-	private Vector position;
-	private Vector bounds;
-	
-	public void setBounds( Vector vector )
+	/**
+	 * Construct a view with the default values for size and position.
+	 * 
+	 */
+	public View()
 	{
-		this.bounds = vector;
+		_position = new Vector( 0, 0 );
+		_size = new Vector( 640, 480 );
 	}
 	
+	/**
+	 * Construct a view with the given dimensions.
+	 * @param position
+	 * @param size
+	 */
+	public View( Vector position, Vector size )
+	{
+		_position = position;
+		_size = size;
+	}
+	
+	/**
+	 * Change the position of the view in the game world, relative to the origin.
+	 * @param position
+	 */
 	public void setPosition( Vector position )
 	{
-		this.position = position;
+		_position = position;
 	}
 	
-	public Vector getBounds()
+	/**
+	 * Change the size of this view.
+	 * Should notify the graphics model of the change in size.
+	 * @param size
+	 */
+	public void setBounds( Vector size )
 	{
-		return bounds;
+		_size = size;
 	}
 	
 	public Vector getPosition()
 	{
-		return position;
+		return _position;
 	}
-}	
+	
+	public Vector getBounds()
+	{
+		return _size;
+	}
+}
