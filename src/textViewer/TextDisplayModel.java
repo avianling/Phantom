@@ -9,7 +9,7 @@ public class TextDisplayModel extends BaseEventModel implements IDisplayModel {
 	private View _view;
 	
 	@Override
-	public void setActiveView( View view )
+	public void setView( View view )
 	{
 		_view = view;
 	}
