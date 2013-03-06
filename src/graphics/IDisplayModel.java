@@ -35,4 +35,10 @@ public interface IDisplayModel {
 	
 	// Text related features?
 	public void drawText( String text, Vector position, int size );
+	
+	/**
+	 * Set the view this game model will use.
+	 * @param view
+	 */
+	public void setView( View view );
 }
