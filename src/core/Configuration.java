@@ -56,7 +56,7 @@ public class Configuration {
 
 		//DEMO Stuff
 		try {
-			//PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
+			PlayerDemo player = new PlayerDemo( new Vector(50, 50) );
 		
 			/*for ( int i=55; i < 90; i += 5 )
 			{
@@ -64,34 +64,25 @@ public class Configuration {
 			}*/
 			
 			// Make a block for the player to stand on.
-			//StaticBlock floor = new StaticBlock(0,400,640,80);
-			//new StaticBlock(400, 300, 240, 20);
-			//new StaticBlock(200, 200, 240, 35);
-			
-			//LineCollisionChecker test = new LineCollisionChecker();
-			//gridDrawer grid = new gridDrawer();
-			
-			//BlockTest upper = new BlockTest( new Vector(128,128));
-			//BlockTest lower = new BlockTest( new Vector(160,160));
-			
-			//BlockTest lowerright = new BlockTest( new Vector(260,160));
-			//BlockTest upperright = new BlockTest( new Vector(228,128));
+			StaticBlock floor = new StaticBlock(0,400,640,80);
+			new StaticBlock(400, 300, 240, 20);
+			new StaticBlock(200, 200, 240, 35);
 			
 			//PlayerOne temp = new PlayerOne(new Vector(250, 250));
 			
 			//worldModel.save("testSave");
-			FileDeserializer s = new FileDeserializer();
-			s.load("testSave");
-		}/* catch ( ObjectCreationException e )
+			//FileDeserializer s = new FileDeserializer();
+			//s.load("testSave");
+		} catch ( ObjectCreationException e )
 		{
 			System.out.println(e.getMessage());
-		}*/ catch (NoSuchSaveException e) {
+		}/* catch (NoSuchSaveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidSaveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		//AssetGenerator.saveAssetFile("PlayerDemo.p", new Vector[] { new Vector(0,0), new Vector(24,0), new Vector(24,32), new Vector(0,32) });
 		

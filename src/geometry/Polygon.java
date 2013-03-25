@@ -55,7 +55,7 @@ public class Polygon implements CollisionBody, Shape {
 		
 		recalculateTransform();
 		
-		//Configuration.getWorldModel().getCollisionManager().add(this);
+		Configuration.getWorldModel().getCollisionManager().add(this);
 	}
 	
 	
